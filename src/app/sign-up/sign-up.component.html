@@ -1,0 +1,209 @@
+<div class="container">
+    <img src="../../assets/login/blue2.jpeg" alt="" >
+    <div class="containers" *ngIf="showForm" >
+        
+        <div class="sign-up">
+            <h3 class="title">Sign up</h3>
+            
+            <form class="sign-up-form" action="javascript:void(0)"  >
+                
+               
+                <div class="input-div">
+                    <label for="fullName">Full Name </label>
+                    <input type="text" id="fullName" class="input-field" name="fullName" placeholder="Full Name"
+                        required #fullName >
+                </div>
+
+                <div class="nationality">
+                    <label for="">You are a </label>
+                    <select name="userType" id="" #userType  required>
+                        <option value="graduate">Graduate</option>
+                        <option value="employer">Employer</option>
+                    </select>
+                </div>
+
+                
+            
+                <div class="nationality">
+                    <label for="nationality">Nationality </label>
+                    <select name="nationality" id="nationality"  #nationality required>
+                        <option value="India">India</option>
+                        <option value="America">America</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                    </select>
+                </div>
+            
+                
+            
+                <div class="input-div">
+                    <label for="phoneNo">Phone No</label>
+                    <input type="tel" name="phoneNo" id="phoneNo" class="input-field" required
+                        placeholder="Mobile No" pattern="[0-9]{10}" #phoneNo>
+                </div>
+
+
+                <div class="input-div">
+                    <label for="emailId">Email Id</label>
+                    <input type="email" id="emailId" name="emailId" class="input-field" required
+                        placeholder="Email Id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" formControlName="reply_to" #emailId>
+                </div>
+
+                <div class="input-div">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="input-field" name="password" placeholder="Password "
+                        required pattern="{6,18}[a-z][A-Z][0-9]"  #password>
+                </div>
+            
+                <button type="submit" class="btn" (click)="sendOTPMail()" >Sign up</button>
+
+            </form>
+            
+
+            <p class="login-btn">Have an account? &nbsp; <a routerLink="../login">Log in</a></p>
+        </div>
+    </div>
+
+    <div class="otp-container"  *ngIf="showOtp" #inputsContainer>
+        <header>
+            <h3>Email Verification</h3>
+            <p>Enter the 4-digit verification code that was sent to your Email.</p>
+        </header>
+        <form  class="otp-form" onsubmit="return false;">
+            <div class="otp-input-field">
+                <input type="number" />
+                <input type="number" disabled />
+                <input type="number"  disabled/>
+                <input type="number"  disabled/>
+            </div>
+            <button (click)="verifyOtp()" >Verify OTP</button>
+        </form>
+        <p>Didn't receive code?
+            <a (click)="resendOTPMail()" class="resend-a" >Resend</a>
+        </p>
+    </div>
+
+    <div class="graduate-info" *ngIf="showGraduateDetails" >
+        <div class="personal-info" *ngIf="showPersonalDetails">
+            <h3 class="title">Personal Info</h3>
+            <form  action="javascript:void(0)" class="personal-form">
+                <div class="gender-div">
+
+                    <label>Gender </label>
+                    <input type="radio" name="gender" id="male" value="Male" #male>
+                    &nbsp;
+                    <label for="male">Male</label>
+
+                    <input type="radio" name="gender" id="female" value="FeMale" #female>
+                    &nbsp;
+                    <label for="female">Female</label>
+
+                </div>
+
+                <div class="dob-div">
+                    <label for="DOB">Date of Birth&nbsp;</label>
+                    <input type="date" id="DOB" name="DOB" required placeholder="dd-mm-yyyy" #dob>
+
+                </div>
+
+                <div class="input-div">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" class="input-field" id="address" placeholder="Address"
+                        required #address>
+                </div>
+
+                <div class="nationality">
+                    <label for="nationality">Skills </label>
+                    <select name="nationality" id="nationality" required #skills >
+                        <option value="Software Testing">Software Testing</option>
+                        <option value="Artificial Intelligence">Artificial Intelligence</option>
+                        <option value="DevOps developer">DevOps developer</option>
+                        <option value="Cloud Engineering">Cloud Engineering</option>
+                    </select>
+                </div>
+
+                <div class="input-div">
+                    <label for="">Project</label>
+                    <input type="text" class="input-field" placeholder="Project Details" #project>
+                </div>
+
+                <input type="submit" class="btn" (click)="storePersonalDetails()"  value="Next" >
+                
+            </form>
+        </div>
+        <div class="college-info" *ngIf="showCollegeDetails">
+            <h3 class="title">College Information</h3>
+            <form  action="javascript:void(0)" class="college-form"  >
+                <div class="input-div">
+                    <label for="">College Name</label>
+                    <input type="text" 
+                    class="input-field"
+                    placeholder="College Name"
+                    required
+                    #collegeName
+                    >
+                </div>
+                <div class="input-div">
+                    <label for="">Address</label>
+                    <input type="text"
+                    class="input-field"
+                    placeholder="College Address"
+                    required 
+                    #collegeAddress
+                    >
+                </div>
+                <input type="submit" class="btn" (click)="storeGraduateDetails()">
+            </form>
+        </div>
+    </div>
+
+    <div class="employer-info" *ngIf="showEmployerDetails">
+        <form action="javascript:void(0)" class="employer-form">
+            <h3 class="title">Employer Info</h3>
+            <div class="input-div">
+                <label for="">Company</label>
+                <input type="text"
+                class="input-field"
+                placeholder="Company Name"
+                required
+                #companyName
+                >
+            </div>
+
+            <div class="input-div">
+                <label for="">Address</label>
+                <input type="text" class="input-field" placeholder="Company Address" #companyAddress>
+            </div>
+
+            <div class="nationality">
+                <label for="nationality">Sector</label>
+                <select name="nationality" id="nationality" required #sector>
+                    <option value="Technology">Technology</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Health Care">Health Care</option>
+                </select>
+            </div>
+
+            
+            <div class="nationality">
+                <label for="nationality"> Company size</label>
+                <select name="nationality" id="nationality" required #companySize>
+                    <option value="0">0</option>
+                    <option value="5,000 - 10,000">5,000 - 10,000 </option>
+                    <option value="10,000 - 50,000">10,000 - 50,000</option>
+                    <option value="60,000 - 1,00,000">60,000 - 1,00,000</option>
+                    <option value=">1,00,000">>1,00,000</option>
+                </select>
+            </div>
+
+            <div class="input-div">
+                <label for="address">Address</label>
+                <input type="text" name="address" class="input-field" id="address" placeholder="Address"
+                    #empAddress
+                    required>
+            </div>
+            <input type="submit" class="btn" (click)="storeEmployeeDetails()">
+        </form>
+    </div>
+
+</div>

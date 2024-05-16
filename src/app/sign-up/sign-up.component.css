@@ -1,0 +1,419 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: sans-serif;
+}
+
+.container{
+    height: 80vh;
+    
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    margin-top: 50px;
+    min-height: 100vh;
+}
+
+.containers{
+    position: relative;
+    width: 40vw;
+    height: 80vh;
+    
+    
+    margin-left: 450px;
+    
+  /*  
+    border: 3px solid #EEE;
+    border-radius: 6px;
+    padding: 60px 60px 60px 60px;
+*/
+    
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #fff;
+
+}
+
+img{
+    margin-top: 10px;
+    width: 100%;
+    height: 90%;
+    position: absolute;
+}
+
+
+
+.sign-up{
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+.sign-up-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 60%;
+    min-width: 238px;
+    padding: 0 10px;
+}
+
+.title{
+    
+    font-size: 35px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.input-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.input-div label{
+    width: 30%;
+    padding-top: 20px;
+    font-size: 18px;
+    font-weight: 400;
+}
+.input-div input{
+    width: 100%;
+    padding-left: 10px;
+}
+label{
+    font-weight: 600;
+}
+
+.input-field{
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    background-color: whitesmoke;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+input{
+    flex: 5;
+    background: none;
+    border: none;
+    outline: none;
+    padding-left: 30px;
+    width: 120%;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+
+.nationality{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    margin-bottom: 15px;
+}
+.nationality label{
+    width: 44%;
+    font-size: 18px;
+    padding-top: 10px;
+    font-weight: 400;
+}
+.nationality select{
+    background-color: whitesmoke;
+    border: 1px solid gray;
+    border-radius: 10px;
+    height: 40px;
+    outline: none;
+    padding-left: 10px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 400;
+    color: #333;
+}
+
+.btn{
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-top: 10px;
+    padding: 7px 7px;
+    background-color: #00A5EC;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background: blue;
+    color: whitesmoke;
+}
+
+.login-btn{
+    font-size: 18px;
+    color: #00A5EC;
+    padding-bottom: 20px;
+}
+.login-btn a{
+    text-decoration: none;
+}
+
+
+.graduate-info{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.college-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.college-info label{
+    width: 40%;
+}
+.personal-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.gender-div{
+    display: flex;
+    width: 100%;
+    height: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.gender-div label{
+    width: 100%;
+    height: 25px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.dob-div{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.dob-div label{
+    font-size: 18px;
+    font-weight: 400;
+    width: 40%;
+    padding-top: 10px;
+}
+.dob-div input{
+    padding-left: 10px;
+    width: 70%;
+    height: 40px;
+    margin: 10px 0;
+    background-color: whitesmoke;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.employer-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    margin-top: 150px;
+    margin-left: 300px;
+    width: 50%;
+}
+
+
+/*  OTP-FORM */
+
+
+:where(.otp-container,.otp-form,.otp-input-field){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.otp-container{
+    margin-left: 500px;
+    margin-right: 450px;
+    margin-top: 150px;
+
+    height: 300px;
+    width: 40%;
+    z-index: 10;
+
+    position: relative;
+
+    background: #fff;
+    padding: 30px 65px;
+    border-color: #e5e7eb;
+    border-radius: 12px;
+    
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #fff;
+}
+.otp-container header{
+    align-items: center;
+}
+.otp-container header h3{
+    padding-left: 120px;
+    font-size: 1.7rem;
+    color: black;
+    font-weight: 700;
+}
+.otp-container header p {
+    color: gray;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+.otp-form .otp-input-field{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap:  10px;
+}
+.otp-input-field input{
+    height: 45px;
+    width: 45px;
+    border-radius: 6px;
+    outline: none;
+    font-size: 1.125rem;
+    display: flex;
+    text-align: center;
+    border: 1px solid #ddd;
+    background-color: rgb(241, 245, 249);
+}
+
+.otp-input-field input::-webkit-inner-spin-button,
+.otp-input-field input::-webkit-outer-spin-button{
+    display: none;
+}
+
+.otp-form button{
+    margin-top: 25px;
+    margin-bottom: 10px;
+    width: 100%;
+    background-color: #4070f4;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    padding: 9px 0;
+    border-radius: 6px;
+    background: #4070f4;
+    transition: all 0.2s ease;
+}
+
+.otp-form button:hover{
+    background-color: blue;
+}
+
+.resend-a{
+    text-decoration: none;
+    color: #4070f4;
+    font-size: 16px;
+}
+
+.graduate-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.personal-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #fff;
+
+    width: 40%;
+    height: 100%;
+
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
+
+.personal-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.college-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #fff;
+
+    margin-top: 50px;
+
+    width: 40%;
+    height: 100%;
+    
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
+
+.college-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.employer-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 0px;
+
+    
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #fff;
+
+    width: 35%;
+    height: 67%;
+    margin-left: 520px;
+
+}
+
+.employer-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

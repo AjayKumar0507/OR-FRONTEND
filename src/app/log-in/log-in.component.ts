@@ -1,0 +1,74 @@
+import { HttpClient } from '@angular/common/http';
+import { Component, ViewChild } from '@angular/core';
+import { OutletContext, Router } from '@angular/router';
+import { DataService } from '../Services/data.service';
+ //import { UserDataService } from '../services/user-data.service';
+
+
+@Component({
+  selector: 'app-log-in',
+  templateUrl: './log-in.component.html',
+  styleUrl: './log-in.component.css',
+
+})
+export class LogInComponent {
+
+
+  @ViewChild('emailId') emailId!:any;
+  @ViewChild('roleId') roleId!:any;
+  @ViewChild('password') password!:any;
+
+  errorMessage:boolean = false;
+
+    
+  constructor(private http:HttpClient,private router: Router,private dataService:DataService) {
+    // ,
+    // ,private userDataService: UserDataService
+  }
+  ngOnViewInit(){
+    this.call();
+  }
+  call(){
+    console.log('print');
+  
+  //  this.router.navigateByUrl('/signup');
+  
+    let response:any;
+
+    let userEmail =this.emailId?.nativeElement.value; // Encode email value
+    let roleId = this.roleId?.nativeElement.value;
+    console.log(userEmail);
+    let a = this.http.get(`http://localhost:8080/getUserByRoleId/${roleId}`).subscribe(
+      (data) => {
+        console.log(data);
+        response = data;
+
+        console.log(this.password?.nativeElement.value);
+        console.log(this.roleId?.nativeElement.value);
+        
+        if(response.password == this.password?.nativeElement.value && response.role.roleId == this.roleId?.nativeElement.value){
+          this.dataService.showLogIn = false;
+          this.dataService.userLoggedIn = true;
+          this.dataService.userData = data;
+          this.router.navigateByUrl("/welcome");
+        }
+        else{
+          this.errorMessage = true;
+        }
+      },
+      (error) => {
+        this.errorMessage = true;
+        console.log(error);
+      }
+    );
+
+    
+  
+      
+  }
+  /*
+  goto(){
+    this.router.navigate(['signup']);
+  }
+  */
+}

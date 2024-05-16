@@ -1,0 +1,31 @@
+<div class="nav-bar">
+    <img src="../../assets/logo3.png"alt="">
+    <div class="nav-items">
+        <ul >
+            <li>
+                <a routerLink="/welcome" >Home</a>
+            </li>
+            <li>
+                <a  (click)="goToJobs()">Jobs for you</a>
+            </li>
+            <li>
+                <a (click)="goToAddJob()" >Add a Job</a>
+            </li>
+            <li>
+                <a routerLink="/aboutUs">About Us</a>
+            </li>
+            <li>
+                <a href="#">Admin</a>
+            </li>
+            <li>
+                <a *ngIf="this.dataService.showLogIn" routerLink="login">Log In</a>
+            </li>
+            <li>
+                <a  *ngIf="this.dataService.showLogIn" routerLink="signup">Sign Up</a>
+            </li>
+
+        </ul>
+    </div>
+    
+</div>
+<br><br><br>
