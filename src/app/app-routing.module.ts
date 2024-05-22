@@ -7,6 +7,9 @@ import { JobApplicationComponent } from './job-application/job-application.compo
 import { JobsComponent } from './jobs/jobs.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AddJobComponent } from './add-job/add-job.component';
+import { EmployersListComponent } from './employers-list/employers-list.component';
+import { GraduatesListComponent } from './graduates-list/graduates-list.component';
+import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
 
 const routes: Routes = [
 
@@ -17,7 +20,10 @@ const routes: Routes = [
   {path:'job-application',component:JobApplicationComponent},
   {path:'jobs',component:JobsComponent},
   {path:'welcome',component:WelcomeComponent},
-  {path:'add-job',component:AddJobComponent}
+  {path:'add-job',component:AddJobComponent},
+  {path:'employers-list',component:EmployersListComponent},
+  {path:'graduates-list',component:GraduatesListComponent},
+  {path:'employer-jobs',component:EmployerJobsComponent}
 
 ];
 

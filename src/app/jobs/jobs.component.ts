@@ -133,7 +133,7 @@ export class JobsComponent  implements OnInit{
       this.renderer.appendChild(d3,i4);
       this.renderer.appendChild(d3,p6);
       this.renderer.appendChild(jobd2div,d3);
-      
+      // 
       this.renderer.appendChild(jobdiv,jobd2div);
 
       

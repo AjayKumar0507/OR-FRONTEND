@@ -13,6 +13,9 @@ import { JobApplicationComponent } from './job-application/job-application.compo
 import { HttpClientModule } from '@angular/common/http';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AddJobComponent } from './add-job/add-job.component';
+import { EmployersListComponent } from './employers-list/employers-list.component';
+import { GraduatesListComponent } from './graduates-list/graduates-list.component';
+import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { AddJobComponent } from './add-job/add-job.component';
     JobsComponent,
     JobApplicationComponent,
     WelcomeComponent,
-    AddJobComponent
+    AddJobComponent,
+    EmployersListComponent,
+    GraduatesListComponent,
+    EmployerJobsComponent
   ],
   imports: [
     BrowserModule,

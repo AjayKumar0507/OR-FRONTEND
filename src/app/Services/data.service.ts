@@ -7,6 +7,8 @@ export class DataService {
 
   constructor() { }
 
+  isAdmin:boolean  = false;
+
   userLoggedIn:boolean = false;
 
   showLogIn:boolean = true;

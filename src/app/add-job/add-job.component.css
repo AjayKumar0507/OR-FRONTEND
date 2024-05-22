@@ -9,20 +9,37 @@
 }
 
 .parent{
-    margin-left: 120px;
+    margin-left: 240px;
     margin-bottom: 20px;
-    border: 2px solid #EEE;
+    
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: #fff;
     border-radius: 6px;
     padding: 60px 60px 60px 60px;
 
-    width: 80%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+
+.banner{
+    margin-left: 240px;
+    width: 60%;
+    height: 60%;
+}
+
+.title{
+    margin-bottom: 20px;
+}
+
 
 .add-job{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: 100%;
     margin-left: 50px;
 }
 

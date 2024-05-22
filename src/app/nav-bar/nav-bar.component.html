@@ -6,22 +6,28 @@
                 <a routerLink="/welcome" >Home</a>
             </li>
             <li>
-                <a  (click)="goToJobs()">Jobs for you</a>
+                <a *ngIf="this.dataService.isAdmin != true" (click)="goToJobs()">Jobs for you</a>
             </li>
             <li>
-                <a (click)="goToAddJob()" >Add a Job</a>
+                <a *ngIf="this.dataService.isAdmin != true" (click)="goToAddJob()" >Add a Job</a>
             </li>
             <li>
                 <a routerLink="/aboutUs">About Us</a>
             </li>
-            <li>
-                <a href="#">Admin</a>
-            </li>
+            
             <li>
                 <a *ngIf="this.dataService.showLogIn" routerLink="login">Log In</a>
             </li>
             <li>
                 <a  *ngIf="this.dataService.showLogIn" routerLink="signup">Sign Up</a>
+            </li>
+
+            <li>
+                <a  *ngIf="this.dataService.isAdmin" routerLink="/employers-list">Employers</a>
+            </li>
+
+            <li>
+                <a  *ngIf="this.dataService.isAdmin" routerLink="/graduates-list">Graduates</a>
             </li>
 
         </ul>
