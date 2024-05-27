@@ -66,3 +66,7 @@ img{
 
     padding-left: 15px;
 }
+
+.logOut{
+    cursor: pointer;
+}

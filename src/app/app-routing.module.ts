@@ -10,6 +10,7 @@ import { AddJobComponent } from './add-job/add-job.component';
 import { EmployersListComponent } from './employers-list/employers-list.component';
 import { GraduatesListComponent } from './graduates-list/graduates-list.component';
 import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
+import { JobsListComponent } from './jobs-list/jobs-list.component';
 
 const routes: Routes = [
 
@@ -23,8 +24,8 @@ const routes: Routes = [
   {path:'add-job',component:AddJobComponent},
   {path:'employers-list',component:EmployersListComponent},
   {path:'graduates-list',component:GraduatesListComponent},
-  {path:'employer-jobs',component:EmployerJobsComponent}
-
+  {path:'employer-jobs',component:EmployerJobsComponent},
+  {path:'jobs-list',component:JobsListComponent}
 ];
 
 @NgModule({

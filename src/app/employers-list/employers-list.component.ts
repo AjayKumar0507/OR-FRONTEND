@@ -66,13 +66,6 @@ export class EmployersListComponent implements OnInit {
       td4.innerHTML = this.employers[i].phoneNo;
       this.renderer.appendChild(tr, td4);
 
-      let td5 = this.renderer.createElement('td');
-      td5.innerHTML = this.employers[i].address;
-      this.renderer.appendChild(tr, td5);
-
-      let td6 = this.renderer.createElement('td');
-      td6.innerHTML = this.employers[i].nationality;
-      this.renderer.appendChild(tr, td6);
 
       let td7 = this.renderer.createElement('td');
       td7.innerHTML = this.employers[i].company;
@@ -81,14 +74,6 @@ export class EmployersListComponent implements OnInit {
       let td8 = this.renderer.createElement('td');
       td8.innerHTML = this.employers[i].sector;
       this.renderer.appendChild(tr, td8);
-
-      let td9 = this.renderer.createElement('td');
-      td9.innerHTML = this.employers[i].companyAddress;
-      this.renderer.appendChild(tr, td9);
-
-      let td10 = this.renderer.createElement('td');
-      td10.innerHTML = this.employers[i].companySize;
-      this.renderer.appendChild(tr, td10);
 
       this.renderer.appendChild(this.table.nativeElement, tr);
     }

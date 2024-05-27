@@ -52,7 +52,6 @@ export class GraduateDetailsService {
         }
       }
   
-      console.log(graduatesList.length);
       return graduatesList;
   
     } catch (error) {
@@ -60,5 +59,7 @@ export class GraduateDetailsService {
       return [];
     }
   }
+
+  
   
 }

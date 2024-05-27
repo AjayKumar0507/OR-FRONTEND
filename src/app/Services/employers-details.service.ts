@@ -74,6 +74,22 @@ export class EmployersDetailsService {
     }
     
   }
+
+  async getAllJobs():Promise<any[]>{
+    
+    let jobs:any[] = [];
+
+    try{
+      const data:any = await this.http.get(`http://localhost:8080/getAllJobs`).toPromise();
+      console.log(data);
+      return data;
+    }
+    catch(error){
+      console.log(error);
+      return [];
+    }
+    
+  }
   
 
 }

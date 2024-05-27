@@ -42,5 +42,15 @@ export class NavBarComponent {
       this.router.navigateByUrl("/jobs");
   }
 
+  logOut(){
+    this.dataService.isAdmin = false;
+    this.dataService.userData = {};
+    this.dataService.jobData = {};
+    this.dataService.jobPosterData = {};
+    this.dataService.userLoggedIn = false;
+    this.dataService.showLogIn = true;
+
+    this.router.navigateByUrl("/welcome");
+  }
   
 }

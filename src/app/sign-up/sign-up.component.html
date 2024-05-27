@@ -90,13 +90,15 @@
                 <div class="gender-div">
 
                     <label>Gender </label>
-                    <input type="radio" name="gender" id="male" value="Male" #male>
-                    &nbsp;
-                    <label for="male">Male</label>
+                        <div class="gender-info">
+                            <input type="radio" name="gender" id="male" value="Male" #male>
+                        &nbsp;
+                        <label for="male">Male</label>
 
-                    <input type="radio" name="gender" id="female" value="FeMale" #female>
-                    &nbsp;
-                    <label for="female">Female</label>
+                        <input type="radio" name="gender" id="female" value="FeMale" #female>
+                        &nbsp;
+                        <label for="female">Female</label>
+                    </div>
 
                 </div>
 
@@ -112,15 +114,13 @@
                         required #address>
                 </div>
 
-                <div class="nationality">
-                    <label for="nationality">Skills </label>
-                    <select name="nationality" id="nationality" required #skills >
-                        <option value="Software Testing">Software Testing</option>
-                        <option value="Artificial Intelligence">Artificial Intelligence</option>
-                        <option value="DevOps developer">DevOps developer</option>
-                        <option value="Cloud Engineering">Cloud Engineering</option>
-                    </select>
+                <div class="input-div">
+                    <label for="address">Skills</label>
+                    <input type="text" name="address" class="input-field" id="address" placeholder="Skills"
+                        required #skills>
                 </div>
+
+                
 
                 <div class="input-div">
                     <label for="">Project</label>
@@ -175,15 +175,10 @@
                 <input type="text" class="input-field" placeholder="Company Address" #companyAddress>
             </div>
 
-            <div class="nationality">
-                <label for="nationality">Sector</label>
-                <select name="nationality" id="nationality" required #sector>
-                    <option value="Technology">Technology</option>
-                    <option value="Finance">Finance</option>
-                    <option value="Health Care">Health Care</option>
-                </select>
+            <div class="input-div">
+                <label for="">Sector</label>
+                <input type="text" class="input-field" placeholder="Sector" #sector>
             </div>
-
             
             <div class="nationality">
                 <label for="nationality"> Company size</label>

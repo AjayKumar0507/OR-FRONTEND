@@ -32,6 +32,7 @@ export class JobApplicationComponent implements OnInit{
 
   employerName = "";
   employerMail = "";
+  appointment:any = {}; 
   
   ngOnInit(){
     console.log(this.dataService.jobData);
@@ -47,6 +48,7 @@ export class JobApplicationComponent implements OnInit{
     emailjs.init('4rF1y6IRYUNj2kI-3');
     const formData = new FormData();
     formData.append('file', this.resume?.nativeElement.files[0]);
+    console.log(this.employerMail);
     try {
       let response = await emailjs.send( "service_ga6bnio","template_bb2qrux" , {
         from_name: "JobSeekho",
@@ -85,7 +87,7 @@ export class JobApplicationComponent implements OnInit{
   sendMailToEmployer(){
 
     let response:any;
-    let a = this.http.get(`http://localhost:8080/getUserByRoleId/${this.dataService.jobData.roles.roleId}`).subscribe(
+    let a = this.http.get(`http://localhost:8080/getUserByRoleId/${this.dataService.userData.role.roleId}`).subscribe(
       (data) => {
         console.log(1);
         console.log(data);
@@ -95,6 +97,7 @@ export class JobApplicationComponent implements OnInit{
 
         this.mailToEmployer();
         this.sendMailToGraduate();
+        this.addAppointments();
 
         this.router.navigateByUrl("/jobs");
 
@@ -108,6 +111,7 @@ export class JobApplicationComponent implements OnInit{
 
   async sendMailToGraduate(){
     emailjs.init('4rF1y6IRYUNj2kI-3');
+    console.log(this.dataService.userData.userEmail);
     try {
       let response = await emailjs.send( "service_ga6bnio","template_cqgom6d" , {
         from_name: "JobSeekho",
@@ -124,6 +128,38 @@ export class JobApplicationComponent implements OnInit{
       console.error("Email sending failed:", error);
       alert("Failed to send email. Please try again.");
     }
+  }
+
+  addAppointments(){
+    this.appointment = {
+      fullName : this.dataService.userData.userName,
+      email : this.dataService.userData.userEmail,
+      college : this.collegelName?.nativeElement.value,
+      collegeAddress : this.collegeAddress?.nativeElement.value,
+      yearOfPassing : this.yearOfPassing?.nativeElement.value,
+      percentage : this.percentage?.nativeElement.value,
+      skills : this.skills?.nativeElement.value,
+      project : this.project?.nativeElement.value,
+      phoneNo : this.dataService.userData.phoneNo,
+      rolea:{
+        roleId:this.dataService.userData.role.roleId,
+        roleTitle:'graduate',
+        roleDesc: 'grd'
+      }
+    }
+
+    this.http.post<any>("http://localhost:8080/addAppointment" , this.appointment).subscribe(
+      response => {
+        console.log('Response from backend:', response);
+        this.router.navigateByUrl("/jobs");
+        // Handle response as needed
+      },
+      error => {
+        console.error('Error sending data to backend:', error);
+        // Handle error as needed
+      }
+    );
+    
   }
 
 }

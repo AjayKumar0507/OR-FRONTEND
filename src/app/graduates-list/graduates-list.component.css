@@ -26,14 +26,14 @@ thead{
     box-shadow: 0 5px 10px rgb(183, 181, 181);
 }
 th{
-    padding: 10px 1.8rem;
+    padding: 10px 2rem;
     text-transform: uppercase;
     
     font-size: .8rem;
     font-weight: 600;
 }
 td{
-    padding: 15px 20px;
+    padding: 15px 2rem;
 }
 tr:nth-child(even){
     background-color:rgb(224, 222, 222);
