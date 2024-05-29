@@ -11,6 +11,7 @@ import { EmployersListComponent } from './employers-list/employers-list.componen
 import { GraduatesListComponent } from './graduates-list/graduates-list.component';
 import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
 import { JobsListComponent } from './jobs-list/jobs-list.component';
+import { GraduateProfileComponent } from './graduate-profile/graduate-profile.component';
 
 const routes: Routes = [
 
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path:'employers-list',component:EmployersListComponent},
   {path:'graduates-list',component:GraduatesListComponent},
   {path:'employer-jobs',component:EmployerJobsComponent},
-  {path:'jobs-list',component:JobsListComponent}
+  {path:'jobs-list',component:JobsListComponent},
+  {path:'graduate-profile',component:GraduateProfileComponent}
 ];
 
 @NgModule({

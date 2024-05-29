@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { EmployersDetailsService } from '../Services/employers-details.service';
 import { GraduateDetailsService } from '../Services/graduate-details.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-graduates-list',
@@ -12,7 +13,7 @@ export class GraduatesListComponent implements OnInit {
   graduates: any[] = [];
   @ViewChild('table', { static: true }) table!: ElementRef;
 
-  constructor(private renderer: Renderer2, private graduateDetailsService: GraduateDetailsService) {}
+  constructor(private renderer: Renderer2, private graduateDetailsService: GraduateDetailsService,private router:Router) {}
 
   async ngOnInit() {
     try {
@@ -42,15 +43,16 @@ export class GraduatesListComponent implements OnInit {
       
       this.renderer.setAttribute(anchor, "routerLink", "/employer-jobs"); 
       this.renderer.setAttribute(anchor,"href" ,"#");
-/*
+
       this.renderer.listen(anchor, 'click', (event) => {
         event.preventDefault();
 
+        this.graduateDetailsService.graduateData = this.graduates[i];
         console.log('Anchor clicked');
-        this.router.navigate(['/employer-jobs']);
+        this.router.navigate(['/graduate-profile']);
          
       });
-*/
+
       this.renderer.appendChild(td1,anchor);
       this.renderer.appendChild(tr, td1);
 

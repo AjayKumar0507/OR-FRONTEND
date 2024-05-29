@@ -11,6 +11,8 @@ export class GraduateDetailsService {
   response1:any = {};
   response2:any = {};
 
+  graduateData:any  = {};
+
 
   async getAllGraduates(): Promise<any[]> {
     let graduatesList: any[] = [];
@@ -24,6 +26,7 @@ export class GraduateDetailsService {
           roleId: data[i].role.roleId,
           userName: "",
           email: "",
+          password:"",
           phoneNo: '',
           nationality: '',
           college : data[i].collegeName,
@@ -41,6 +44,7 @@ export class GraduateDetailsService {
           if (userData != null) {
             graduate.userName = userData.userName;
             graduate.email = userData.userEmail;
+            graduate.password = userData.password;
             graduate.phoneNo = userData.phoneNo;
             graduate.nationality = userData.nationality;
             graduatesList.push(graduate);
@@ -60,6 +64,20 @@ export class GraduateDetailsService {
     }
   }
 
+  async getJobsAppliedByroleId():Promise<any[]>{
+    let jobs:any[] = [];
+
+    try{
+      
+      const data:any = await this.http.get(`http://localhost:8080/getJobsAppliedByRoleId/${this.graduateData.roleId}`).toPromise();
+      console.log(data);
+      return data;
+    }
+    catch(error){
+      console.log(error);
+      return [];
+    }
+  }
   
   
 }

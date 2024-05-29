@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild} from '@angular/core';
 import { FormsModule } from '@angular/forms'
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-add-job',
   templateUrl: './add-job.component.html',
@@ -8,7 +10,7 @@ import { FormsModule } from '@angular/forms'
 })
 export class AddJobComponent {
 
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient,private router:Router){}
 
   isAgree:boolean = false;
   
@@ -45,6 +47,8 @@ export class AddJobComponent {
     this.http.post<any>("http://localhost:8080/addJob" , this.jobData).subscribe(
           response => {
             console.log('Response from backend:', response);
+            this.router.navigateByUrl('/jobs');
+            
             // Handle response as needed
           },
           error => {

@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { EmployersDetailsService } from '../Services/employers-details.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employer-jobs',
@@ -21,7 +23,20 @@ export class EmployerJobsComponent  {
   sector: any;
   companySize: any;
 
-  constructor(private employerDetailsService:EmployersDetailsService,private renderer:Renderer2){}
+  
+  @ViewChild('phoneNo1') phoneNo1:ElementRef | undefined;
+  @ViewChild('address1') address1: ElementRef | undefined;
+  @ViewChild('sector1') sector1: ElementRef | undefined;
+  @ViewChild('nationality1') nationality1: ElementRef | undefined;
+  @ViewChild('companySize1') companySize1: ElementRef | undefined; 
+  @ViewChild('company1') company1: ElementRef | undefined;
+  @ViewChild('companyAddress1') companyAddress1: ElementRef | undefined;
+
+  showModal:boolean = false;
+  password: any;
+  
+
+  constructor(private employerDetailsService:EmployersDetailsService,private renderer:Renderer2,private http:HttpClient,private router: Router){}
 
   async ngOnInit() {
     try {
@@ -35,6 +50,7 @@ export class EmployerJobsComponent  {
   generateTable(){
 
     this.userName = this.employerDetailsService.employerData.userName;
+    this.password = this.employerDetailsService.employerData.password;
     this.roleId = this.employerDetailsService.employerData.roleId;
     this.userMail = this.employerDetailsService.employerData.email;
     this.phoneNo = this.employerDetailsService.employerData.phoneNo;
@@ -91,6 +107,76 @@ export class EmployerJobsComponent  {
 
       this.renderer.appendChild(this.table.nativeElement,tr1);
     }
+  }
+
+  deleteEmployer(){
+
+    this.http.delete(`http://localhost:8080/deleteUserByRoleId/${this.roleId}`).subscribe(
+      response => {
+        console.log('Response from backend:', response);
+        this.router.navigateByUrl('/employers-list');
+      },
+      error => {
+        console.error('Error sending data to backend:', error);
+        // Handle error as needed
+      }
+    );
+  }
+
+  editEmployer() {
+    this.showModal = !this.showModal;    
+  }
+
+  edit(){
+    let user = {
+      userName : this.userName,
+      userEmail:this.userMail,
+      password:this.password,
+
+      nationality : this.nationality1?.nativeElement.value,
+      phoneNo:this.phoneNo1?.nativeElement.value,
+      role:{
+        roleId:this.roleId,
+        roleTitle:'employer',
+        roleDesc:'emp'
+      }
+    }
+
+    let employer = {
+      company:this.company1?.nativeElement.value,
+      companyAddress:this.companyAddress1?.nativeElement.value,
+      sector:this.sector1?.nativeElement.value,
+      companySize:this.companySize1?.nativeElement.value,
+      address:this.address1?.nativeElement.value,
+      role:{
+        roleId:this.roleId,
+        roleTitle:'employer',
+        roleDesc:'emp'
+      }
+    }
+
+
+    this.http.post<any>("http://localhost:8080/updateUserByRoleId" , user).subscribe(
+      response => {
+        console.log('Response from backend:', response);
+        
+        this.http.post<any>("http://localhost:8080/updateEmployerByRoleId" , employer).subscribe(
+          response => {
+            console.log('Response from backend:', response);
+            this.router.navigateByUrl('/employers-list');
+          },
+          error => {
+            console.error('Error sending data to backend:', error);
+            // Handle error as needed
+          }
+        );
+      },
+      error => {
+        console.error('Error sending data to backend:', error);
+        // Handle error as needed
+      }
+    );
+    
   }
 
 }

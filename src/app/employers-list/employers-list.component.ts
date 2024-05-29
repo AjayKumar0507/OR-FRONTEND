@@ -39,6 +39,7 @@ export class EmployersListComponent implements OnInit {
       anchor.innerHTML = this.employers[i].userName;
       
       
+      
       this.renderer.setAttribute(anchor, "routerLink", "/employer-jobs"); 
       this.renderer.setAttribute(anchor,"href" ,"#");
       this.renderer.listen(anchor, 'click', (event) => {

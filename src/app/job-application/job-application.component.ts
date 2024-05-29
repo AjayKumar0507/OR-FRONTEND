@@ -141,12 +141,14 @@ export class JobApplicationComponent implements OnInit{
       skills : this.skills?.nativeElement.value,
       project : this.project?.nativeElement.value,
       phoneNo : this.dataService.userData.phoneNo,
+      jobId:this.dataService.jobData.jobId,
       rolea:{
         roleId:this.dataService.userData.role.roleId,
         roleTitle:'graduate',
         roleDesc: 'grd'
       }
     }
+    console.log(this.appointment);
 
     this.http.post<any>("http://localhost:8080/addAppointment" , this.appointment).subscribe(
       response => {

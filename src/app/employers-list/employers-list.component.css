@@ -1,4 +1,11 @@
 
+.img{
+    margin-top: 10px;
+    width: 100%;
+    height: 90%;
+    position: absolute;
+}
+
 h2{
     font-family: sans-serif;
     margin-left: 40px;
@@ -8,7 +15,7 @@ h2{
     font-family: sans-serif;
     display: grid;
     justify-content: center;
-
+    
 }
 
 table{
