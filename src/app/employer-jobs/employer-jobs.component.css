@@ -2,6 +2,15 @@
     font-family: sans-serif;
 }
 
+img{
+    width: 100%;
+    position: absolute;
+    background-size: center;
+    background-position: center;
+    z-index: -1;
+}
+
+
 h1{
     margin-left: 170px;
 }
@@ -21,6 +30,7 @@ h1{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     width: 80%;
     border-radius: 17px;
+    background-color: rgba(255,255,255,0.5);
 }
 
 .all-details{
@@ -83,8 +93,7 @@ h3{
 }
 
 i{
-    color: #333;
-    opacity: 0.6;
+    color: black;
     font-size: 25px;
 }
 
@@ -111,14 +120,14 @@ h4{
 }
 
 h2{
-    margin-left: 90px;
+    margin-left: 160px;
 }
 
 p{
     margin: 0;
     padding-top: 2px;
     font-size: 14px;
-    color: gray;
+    color: black;
 }
 
 .jobs-info{
@@ -126,6 +135,7 @@ p{
     width: 80%;
     border-radius: 17px;
     margin-top: 40px;
+    background-color: rgba(255,255,255,0.5);
 }
 
 
@@ -179,7 +189,7 @@ a{
     margin-left: 200px;
     margin-top: 50px;
     border-radius: 17px;
-    z-index: 10;
+    background-color: rgba(255,255,255,0.5);
 }
 
 .employer-form{
@@ -187,7 +197,7 @@ a{
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    padding: 20px 0px;
+    padding: 40px 0px;
 }
 
 .unchanged {
@@ -202,8 +212,8 @@ a{
 .unchanged label{
     padding-top: 20px;
     
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .unchanged p{
@@ -230,8 +240,8 @@ a{
 .input-div label{
     width: 30%;
     padding-top: 20px;
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 20px;
+    font-weight: 600;
 }
 .input-div input{
     width: 50%;

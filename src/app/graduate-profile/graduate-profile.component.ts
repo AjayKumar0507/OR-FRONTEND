@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class GraduateProfileComponent {
 
   jobs:any = {};
-  @ViewChild('table', { static: true }) table!: ElementRef;
+  @ViewChild('table') table: ElementRef | undefined;
   
   showModal: any;
 
@@ -47,6 +47,7 @@ export class GraduateProfileComponent {
   async ngOnInit() {
     try {
       this.jobs  = await  this.graduateDetailsService.getJobsAppliedByroleId();
+      console.log(this.jobs);
       this.generateTable();
     } catch (error) {
       console.error('Error fetching employers:', error);
@@ -77,11 +78,11 @@ export class GraduateProfileComponent {
       this.renderer.addClass(p,'no-jobs');
       
       this.renderer.appendChild(tr1,p);
-      this.renderer.appendChild(this.table.nativeElement,tr1);
+      this.renderer.appendChild(this.table?.nativeElement,tr1);
       return;
     }
     for(let i=0;i<Object.keys(this.jobs).length;i++){
-
+      
       let tr1 = this.renderer.createElement('tr');
       
       let td1 = this.renderer.createElement('td');
@@ -114,7 +115,7 @@ export class GraduateProfileComponent {
 
 
 
-      this.renderer.appendChild(this.table.nativeElement,tr1);
+      this.renderer.appendChild(this.table?.nativeElement,tr1);
     }
   }
 

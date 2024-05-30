@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class EmployerJobsComponent  {
   
   jobs:any = {};
-  @ViewChild('table', { static: true }) table!: ElementRef;
+  @ViewChild('table') table: ElementRef|undefined;
   userName: any;
   roleId: any;
   userMail: any;
@@ -66,9 +66,8 @@ export class EmployerJobsComponent  {
       let p = this.renderer.createElement('p');
       p.innerHTML = "No Jobs Posted";
       this.renderer.addClass(p,'no-jobs');
-      
       this.renderer.appendChild(tr1,p);
-      this.renderer.appendChild(this.table.nativeElement,tr1);
+      this.renderer.appendChild(this.table?.nativeElement,tr1);
       return;
     }
     for(let i=0;i<Object.keys(this.jobs).length;i++){
@@ -105,7 +104,7 @@ export class EmployerJobsComponent  {
 
 
 
-      this.renderer.appendChild(this.table.nativeElement,tr1);
+      this.renderer.appendChild(this.table?.nativeElement,tr1);
     }
   }
 

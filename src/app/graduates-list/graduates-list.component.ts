@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class GraduatesListComponent implements OnInit {
 
   graduates: any[] = [];
-  @ViewChild('table', { static: true }) table!: ElementRef;
+  @ViewChild('table') table: ElementRef | undefined;
 
   constructor(private renderer: Renderer2, private graduateDetailsService: GraduateDetailsService,private router:Router) {}
 
@@ -27,7 +27,7 @@ export class GraduatesListComponent implements OnInit {
 
   generateTable() {
     // Clear existing table rows
-    const tableElement = this.table.nativeElement;
+    const tableElement = this.table?.nativeElement;
     while (tableElement.firstChild) {
       this.renderer.removeChild(tableElement, tableElement.firstChild);
     }
@@ -83,7 +83,7 @@ export class GraduatesListComponent implements OnInit {
 
 
       
-      this.renderer.appendChild(this.table.nativeElement, tr);
+      this.renderer.appendChild(this.table?.nativeElement, tr);
     }
   }
 

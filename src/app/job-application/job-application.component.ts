@@ -3,6 +3,7 @@ import { DataService } from '../Services/data.service';
 import emailjs from '@emailjs/browser';
 import { HttpClient } from '@angular/common/http';
 import {  Router, Routes } from '@angular/router';
+import { error } from 'node:console';
 
 @Component({
   selector: 'app-job-application',
@@ -23,6 +24,7 @@ export class JobApplicationComponent implements OnInit{
   @ViewChild('resume') resume: ElementRef | undefined;
 
 
+  response : any = {};
   jobName:string = "";
   companyName:string = "";
   jobLocation:string = "";
@@ -95,8 +97,8 @@ export class JobApplicationComponent implements OnInit{
         this.employerName = response.userName;
         this.employerMail = response.userEmail;
 
-        this.mailToEmployer();
-        this.sendMailToGraduate();
+        //this.mailToEmployer();
+        //this.sendMailToGraduate();
         this.addAppointments();
 
         this.router.navigateByUrl("/jobs");
@@ -131,30 +133,49 @@ export class JobApplicationComponent implements OnInit{
   }
 
   addAppointments(){
-    this.appointment = {
-      fullName : this.dataService.userData.userName,
-      email : this.dataService.userData.userEmail,
-      college : this.collegelName?.nativeElement.value,
-      collegeAddress : this.collegeAddress?.nativeElement.value,
-      yearOfPassing : this.yearOfPassing?.nativeElement.value,
-      percentage : this.percentage?.nativeElement.value,
-      skills : this.skills?.nativeElement.value,
-      project : this.project?.nativeElement.value,
-      phoneNo : this.dataService.userData.phoneNo,
-      jobId:this.dataService.jobData.jobId,
-      rolea:{
-        roleId:this.dataService.userData.role.roleId,
-        roleTitle:'graduate',
+    
+    console.log(this.dataService.jobData.jobId);
+
+    let appointment = {
+      jobId: this.dataService.jobData.jobId,
+      fullName: this.dataService.userData.userName,
+      email: this.dataService.userData.userEmail,
+      phoneNo: this.dataService.userData.phoneNo,
+      college: this.collegelName?.nativeElement.value,
+      collegeAddress: this.collegeAddress?.nativeElement.value,
+      yearOfPassing: this.yearOfPassing?.nativeElement.value,
+      percentage: this.percentage?.nativeElement.value,
+      skills: this.skills?.nativeElement.value,
+      project: this.project?.nativeElement.value,
+      resume:null,
+      rolea: {
+        roleId: this.dataService.userData.role.roleId,
+        roleTitle: 'graduate',
         roleDesc: 'grd'
       }
     }
-    console.log(this.appointment);
-
-    this.http.post<any>("http://localhost:8080/addAppointment" , this.appointment).subscribe(
+    
+    this.http.post<any>("http://localhost:8080/addAppointment" , appointment ).subscribe(
       response => {
+        console.log(response);
         console.log('Response from backend:', response);
-        this.router.navigateByUrl("/jobs");
+        this.response = response;
+        //this.router.navigateByUrl("/jobs");
         // Handle response as needed
+
+        this.http.post<any>("http://localhost:8080/updateAppointment" , 
+          {
+            resume : this.resume?.nativeElement.files[0],
+            jobId : this.response.jobId
+          }
+        ).subscribe(
+          response => {
+            console.log('Response from backend',response);
+          },
+          error => {
+            console.error('Error sending file to backend',error);
+          }
+        )
       },
       error => {
         console.error('Error sending data to backend:', error);
