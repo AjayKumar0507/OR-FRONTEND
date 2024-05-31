@@ -1,9 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../Services/data.service';
 import emailjs from '@emailjs/browser';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {  Router, Routes } from '@angular/router';
 import { error } from 'node:console';
+import { Appointment } from '../modal/appointment';
+import { Role } from '../modal/role';
 
 @Component({
   selector: 'app-job-application',
@@ -34,7 +36,9 @@ export class JobApplicationComponent implements OnInit{
 
   employerName = "";
   employerMail = "";
-  appointment:any = {}; 
+  
+  appointment :Appointment = new Appointment();
+  rolea : Role = new Role();
   
   ngOnInit(){
     console.log(this.dataService.jobData);
@@ -97,8 +101,8 @@ export class JobApplicationComponent implements OnInit{
         this.employerName = response.userName;
         this.employerMail = response.userEmail;
 
-        //this.mailToEmployer();
-        //this.sendMailToGraduate();
+        this.mailToEmployer();
+        this.sendMailToGraduate();
         this.addAppointments();
 
         this.router.navigateByUrl("/jobs");
@@ -136,7 +140,13 @@ export class JobApplicationComponent implements OnInit{
     
     console.log(this.dataService.jobData.jobId);
 
-    let appointment = {
+    this.rolea = {
+      roleId: this.dataService.userData.role.roleId,
+      roleTitle: 'graduate',
+      roleDesc: 'grd'
+    }
+
+    this.appointment = {
       jobId: this.dataService.jobData.jobId,
       fullName: this.dataService.userData.userName,
       email: this.dataService.userData.userEmail,
@@ -148,14 +158,10 @@ export class JobApplicationComponent implements OnInit{
       skills: this.skills?.nativeElement.value,
       project: this.project?.nativeElement.value,
       resume:null,
-      rolea: {
-        roleId: this.dataService.userData.role.roleId,
-        roleTitle: 'graduate',
-        roleDesc: 'grd'
-      }
+      rolea: this.rolea
     }
     
-    this.http.post<any>("http://localhost:8080/addAppointment" , appointment ).subscribe(
+    this.http.post<any>("http://localhost:8080/addAppointment" , this.appointment ).subscribe(
       response => {
         console.log(response);
         console.log('Response from backend:', response);
@@ -163,11 +169,16 @@ export class JobApplicationComponent implements OnInit{
         //this.router.navigateByUrl("/jobs");
         // Handle response as needed
 
-        this.http.post<any>("http://localhost:8080/updateAppointment" , 
-          {
-            resume : this.resume?.nativeElement.files[0],
-            jobId : this.response.jobId
-          }
+        const formData: FormData = new FormData();
+        formData.append('resume', this.resume?.nativeElement.files[0]);
+        formData.append('jobId', this.response.jobId);
+
+        const headers = new HttpHeaders({
+          'Content-Type': 'multipart/form-data'
+        });
+
+        this.http.post<any>(`http://localhost:8080/updateAppointment/${this.response.jobId}` , 
+          this.resume?.nativeElement.files[0]
         ).subscribe(
           response => {
             console.log('Response from backend',response);

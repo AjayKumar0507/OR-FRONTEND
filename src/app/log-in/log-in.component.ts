@@ -38,7 +38,7 @@ export class LogInComponent {
     let userEmail =this.emailId?.nativeElement.value;
     let roleId = this.roleId?.nativeElement.value;
 
-    if(userEmail == "abc@gmail.com" && roleId=="a" && this.password?.nativeElement.value=="g"){
+    if(userEmail == "abc@gmail.com" && roleId=="admin" && this.password?.nativeElement.value=="gog89p13"){
       this.dataService.isAdmin = true;
       this.dataService.showLogIn = false;
       this.dataService.userLoggedIn = true;

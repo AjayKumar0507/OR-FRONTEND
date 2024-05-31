@@ -16,7 +16,7 @@
     z-index: 5;
 
     font-family: sans-serif;
-    background-color:whitesmoke;
+    background-color: #5F6BF5;
 }
 
 .nav-items{
@@ -37,7 +37,7 @@
 }
 
 .nav-bar ul li a{
-    color: black;
+    color: whitesmoke;
     font-size: 17px;
     padding: 7px 13px;
     border-radius: 5px;

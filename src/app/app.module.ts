@@ -18,6 +18,7 @@ import { GraduatesListComponent } from './graduates-list/graduates-list.componen
 import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
 import { JobsListComponent } from './jobs-list/jobs-list.component';
 import { GraduateProfileComponent } from './graduate-profile/graduate-profile.component';
+import { JobProfileComponent } from './job-profile/job-profile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { GraduateProfileComponent } from './graduate-profile/graduate-profile.co
     GraduatesListComponent,
     EmployerJobsComponent,
     JobsListComponent,
-    GraduateProfileComponent
+    GraduateProfileComponent,
+    JobProfileComponent
   ],
   imports: [
     BrowserModule,

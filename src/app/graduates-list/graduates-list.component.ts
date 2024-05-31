@@ -73,13 +73,6 @@ export class GraduatesListComponent implements OnInit {
       td5.innerHTML = this.graduates[i].college;
       this.renderer.appendChild(tr, td5);
 
-      let td7 = this.renderer.createElement('td');
-      td7.innerHTML = this.graduates[i].skills;
-      this.renderer.appendChild(tr, td7);
-
-      let td8 = this.renderer.createElement('td');
-      td8.innerHTML = this.graduates[i].project;
-      this.renderer.appendChild(tr, td8);
 
 
       

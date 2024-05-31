@@ -12,6 +12,7 @@ import { GraduatesListComponent } from './graduates-list/graduates-list.componen
 import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
 import { JobsListComponent } from './jobs-list/jobs-list.component';
 import { GraduateProfileComponent } from './graduate-profile/graduate-profile.component';
+import { JobProfileComponent } from './job-profile/job-profile.component';
 
 const routes: Routes = [
 
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path:'graduates-list',component:GraduatesListComponent},
   {path:'employer-jobs',component:EmployerJobsComponent},
   {path:'jobs-list',component:JobsListComponent},
-  {path:'graduate-profile',component:GraduateProfileComponent}
+  {path:'graduate-profile',component:GraduateProfileComponent},
+  {path:'job-profile',component:JobProfileComponent}
 ];
 
 @NgModule({

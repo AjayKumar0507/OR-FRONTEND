@@ -72,9 +72,6 @@ export class EmployersListComponent implements OnInit {
       td7.innerHTML = this.employers[i].company;
       this.renderer.appendChild(tr, td7);
 
-      let td8 = this.renderer.createElement('td');
-      td8.innerHTML = this.employers[i].sector;
-      this.renderer.appendChild(tr, td8);
 
       this.renderer.appendChild(this.table.nativeElement, tr);
     }

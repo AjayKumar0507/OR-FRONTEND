@@ -3,6 +3,10 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import emailjs from '@emailjs/browser';
+import { User } from '../modal/user';
+import { Role } from '../modal/role';
+import { Graduate } from '../modal/graduate';
+import { Employer } from '../modal/employer';
 
 @Component({
   selector: 'app-sign-up',
@@ -30,7 +34,10 @@ export class SignUpComponent implements AfterViewInit {
   showCollegeDetails:boolean = false;
   showEmployerDetails:boolean = false;
 
-  userData:any = {};
+  user: User = new User();
+  role:Role = new Role();
+  GraduateData:Graduate = new Graduate();
+  EmployerData:Employer = new Employer();
 
   // user form details
   @ViewChild('fullName') fullName: ElementRef | undefined;
@@ -85,7 +92,7 @@ export class SignUpComponent implements AfterViewInit {
 
   async sendOTPMail() {
 
-    this.userData = {
+    this.user = {
       userName: this.fullName?.nativeElement.value,
       userEmail: this.emailId?.nativeElement.value,
       typeOfUser: this.userType?.nativeElement.value,
@@ -94,7 +101,7 @@ export class SignUpComponent implements AfterViewInit {
       password: this.password?.nativeElement.value
     };
 
-    console.log(this.userData);
+    console.log(this.user);
 
     console.log("hello");
 
@@ -235,9 +242,9 @@ export class SignUpComponent implements AfterViewInit {
 
     console.log(this.selectedUserType);
 
-    console.log(this.userData);
+    console.log(this.user);
   
-    this.http.post<any>("http://localhost:8080/addUser" , this.userData).subscribe(
+    this.http.post<any>("http://localhost:8080/addUser" , this.user).subscribe(
       response => {
         this.response = response;
         this.userRoleId = response.role.roleId;
@@ -245,8 +252,13 @@ export class SignUpComponent implements AfterViewInit {
 
         this.sendRoleIdMail(this.userRoleId);
         
+        this.role = {
+          roleId : this.userRoleId,
+          roleTitle : 'graduate',
+          roleDesc : 'jobSeeker'
+        }
 
-        const GraduateData = {
+        this.GraduateData = {
           collegeName: this.collegeName?.nativeElement.value,
           collegeAddress: this.collegeAddress?.nativeElement.value,
           gender: this.gender,
@@ -254,16 +266,12 @@ export class SignUpComponent implements AfterViewInit {
           project: this.gproject,
           dateOfBirth: this.gdob,
           address: this.gaddress,
-          role:{
-            roleId:this.userRoleId,
-            roleTitle:'graduate',
-            roleDesc:'jobSeeker'
-          }
+          role: this.role
         };
     
-        console.log(GraduateData);
+        console.log(this.GraduateData);
     
-        this.http.post<any>("http://localhost:8080/addGraduate" , GraduateData).subscribe(
+        this.http.post<any>("http://localhost:8080/addGraduate" , this.GraduateData).subscribe(
           response => {
             console.log('Response from backend:', response);
             this.router.navigateByUrl("/login");
@@ -290,7 +298,7 @@ export class SignUpComponent implements AfterViewInit {
 
   storeEmployeeDetails(){
     
-    this.http.post<any>("http://localhost:8080/addUser" , this.userData).subscribe(
+    this.http.post<any>("http://localhost:8080/addUser" , this.user).subscribe(
       response => {
         this.response = response;
         this.userRoleId = response.role.roleId;
@@ -298,23 +306,24 @@ export class SignUpComponent implements AfterViewInit {
 
         this.sendRoleIdMail(this.userRoleId);
         
+        this.role = {
+          roleId:this.userRoleId,
+          roleTitle:'graduate',
+          roleDesc:'jobSeeker'
+        }
 
-        const EmployerData = {
+        this.EmployerData = {
           company:this.companyName?.nativeElement.value,
           companyAddress:this.companyAddress?.nativeElement.value,
           sector:this.sector?.nativeElement.value,
           companySize:this.companySize?.nativeElement.value,
           address: this.empAddress?.nativeElement.value,
-          role:{
-            roleId:this.userRoleId,
-            roleTitle:'graduate',
-            roleDesc:'jobSeeker'
-          }
+          role:this.role
         };
     
-        console.log(EmployerData);
+        console.log(this.EmployerData);
     
-        this.http.post<any>("http://localhost:8080/addEmployer" , EmployerData).subscribe(
+        this.http.post<any>("http://localhost:8080/addEmployer" , this.EmployerData).subscribe(
           response => {
             console.log('Response from backend:', response);
             this.router.navigateByUrl("/login");

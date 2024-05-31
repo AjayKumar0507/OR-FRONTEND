@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild} from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { Router } from '@angular/router';
+import { Job } from '../modal/job';
+import { Role } from '../modal/role';
 
 @Component({
   selector: 'app-add-job',
@@ -13,6 +15,9 @@ export class AddJobComponent {
   constructor(private http:HttpClient,private router:Router){}
 
   isAgree:boolean = false;
+
+  jobData : Job = new Job();
+  roles : Role = new Role();
   
   @ViewChild('roleId') roleId: ElementRef | undefined;
   @ViewChild('jobName') jobName: ElementRef | undefined;
@@ -23,16 +28,17 @@ export class AddJobComponent {
   @ViewChild('jobLocation') jobLocation: ElementRef | undefined;
   @ViewChild('jobVacancy') jobVacancy: ElementRef | undefined;
 
-  jobData:any = {};
 
   storeJob(){
+    
+    this.roles = {
+      roleId: this.roleId?.nativeElement.value,
+      roleTitle:'employer',
+      roleDesc:'emp'
+    }
+
     this.jobData = {
-      roles:{
-        roleId: this.roleId?.nativeElement.value,
-        roleTitle:'employer',
-        roleDesc:'emp'
-      },
-      
+      roles:this.roles,
       jobName: this.jobName?.nativeElement.value,
       jobType: this.jobType?.nativeElement.value,
       jobDescription: this.jobDescription?.nativeElement.value,

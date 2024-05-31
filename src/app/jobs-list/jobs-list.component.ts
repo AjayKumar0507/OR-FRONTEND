@@ -1,5 +1,7 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { EmployersDetailsService } from '../Services/employers-details.service';
+import { DataService } from '../Services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-jobs-list',
@@ -21,7 +23,7 @@ export class JobsListComponent {
   sector: any;
   companySize: any;
   
-  constructor(private employerDetailsService:EmployersDetailsService,private renderer:Renderer2){}
+  constructor(private employerDetailsService:EmployersDetailsService,private renderer:Renderer2,private dataService:DataService,private router:Router){}
 
   async ngOnInit() {
     try {
@@ -58,34 +60,39 @@ export class JobsListComponent {
     for(let i=0;i<Object.keys(this.jobs).length;i++){
 
       let tr1 = this.renderer.createElement('tr');
+
+      let td2 = this.renderer.createElement('td');
+      let anchor = this.renderer.createElement('a');
+      anchor.innerHTML = this.jobs[i].jobName;
+      
+      
+      this.renderer.setAttribute(anchor, "routerLink", "/employer-jobs"); 
+      this.renderer.setAttribute(anchor,"href" ,"#");
+
+      this.renderer.listen(anchor, 'click', (event) => {
+        event.preventDefault();
+
+        this.dataService.jobData = this.jobs[i];
+        console.log('Anchor clicked');
+        this.router.navigate(['/job-profile']);
+         
+      });
+
+      this.renderer.appendChild(td2,anchor);
+      this.renderer.appendChild(tr1, td2);
       
       let td1 = this.renderer.createElement('td');
       td1.innerHTML = this.jobs[i].company;
       this.renderer.appendChild(tr1,td1);
 
-      let td2 = this.renderer.createElement('td');
-      td2.innerHTML = this.jobs[i].jobName;
-      this.renderer.appendChild(tr1,td2);
-
-      let td3 = this.renderer.createElement('td');
-      td3.innerHTML = this.jobs[i].jobType;
-      this.renderer.appendChild(tr1,td3);
-
       let td4 = this.renderer.createElement('td');
       td4.innerHTML = this.jobs[i].jobSalary;
       this.renderer.appendChild(tr1,td4);
-
-      let td5 = this.renderer.createElement('td');
-      td5.innerHTML = this.jobs[i].jobLocation;
-      this.renderer.appendChild(tr1,td5);
 
       let td6 = this.renderer.createElement('td');
       td6.innerHTML = this.jobs[i].jobDescription;
       this.renderer.appendChild(tr1,td6);
 
-      let td7 = this.renderer.createElement('td');
-      td7.innerHTML = this.jobs[i].jobVacancy;
-      this.renderer.appendChild(tr1,td7);
 
 
 
