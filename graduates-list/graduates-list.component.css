@@ -1,0 +1,95 @@
+/* General Styles */
+h2 {
+   
+    font-family: 'Helvetica Neue', sans-serif;
+    margin-left: 45%;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.graduates-list {
+    background: url('/assets/bgw.jpeg');
+    background-position: center;
+    background-size: cover;
+    font-family: 'Helvetica Neue', sans-serif;
+    display: grid;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Card Container Styles */
+.graduates-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Card Styles */
+.graduate-card {
+    background-color: rgba(233, 226, 226, 0.2);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.graduate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.graduate-card h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.graduate-card p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #fff;
+}
+
+/* Button Styles */
+.graduate-card button {
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 1rem;
+}
+
+.graduate-card button:hover {
+    background-color: black;
+    transform: scale(1.05);
+}
+
+/* Anchor Link Styles */
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .graduates-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .graduate-card {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}

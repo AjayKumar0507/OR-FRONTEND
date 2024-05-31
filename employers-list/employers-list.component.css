@@ -1,0 +1,95 @@
+/* General Styles */
+
+h2 {
+    font-family: 'Helvetica Neue', sans-serif;
+    margin-left: 45%;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.employers-list {
+    font-family: 'Helvetica Neue', sans-serif;
+    display: grid;
+    justify-content: center;
+    padding: 20px;
+    background: url('/assets/bgw.jpeg');
+    background-position: center;
+    background-size: cover;
+}
+
+/* Card Container Styles */
+.employers-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Card Styles */
+.employer-card {
+    background-color: rgba(235, 229, 229, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(5, 5, 5, 0.1);
+    padding: 20px;
+    width: 300px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.employer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.employer-card h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.employer-card p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #fff;
+}
+
+/* Button Styles */
+.employer-card button {
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 1rem;
+}
+
+.employer-card button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Anchor Link Styles */
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .employers-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .employer-card {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}

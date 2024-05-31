@@ -1,0 +1,84 @@
+/* Ensure the body has no margin and padding */
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style the navigation bar */
+  .nav-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 1000;
+  }
+  
+  /* Style the logo */
+  .logo {
+    height: 50px;
+    margin-right: 40px; /* Increase the margin to add more space between logo and nav items */
+  }
+  
+  /* Style the navigation items */
+  .nav-items {
+    margin-left: 40%;
+  }
+  
+  /* Style the navigation list */
+  .nav-items ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  /* Style the navigation links */
+  .nav-items ul li {
+    display: inline;
+  }
+  
+  .nav-items ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-items ul li a:hover {
+    background-color: #575757;
+    border-radius: 5px;
+  }
+  
+  /* Add styles for specific elements */
+  .nav-items ul li a.logOut {
+    color: #ff4d4d;
+  }
+  
+  /* Add spacing to the main content to avoid overlap with the fixed nav bar */
+  main {
+    padding-top: 80px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .nav-items ul {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .nav-items ul li {
+      width: 100%;
+    }
+  
+    .nav-items ul li a {
+      display: block;
+      width: 100%;
+    }
+  }
+  
