@@ -11,6 +11,7 @@
         <div class="company-name">
             <h4>{{jobName}}</h4>
             <p >{{companyName}}</p>
+
         </div>
         <div class="job-details2">
             <div class="location">
@@ -136,14 +137,21 @@
             <div class="input-div">
                 <label for="">Paste your Resume<div class="star">&nbsp;*</div></label>
                 <input type="file"
+                (change)="onFileSelected($event)"
                 class="input-field"
-                enctype="multipart/form-data"
                 #resume
                 required
                 >
             </div>
             <button class="btn" (click)="sendMailToEmployer()" >Apply</button>
         </div>
+
+
+
+
+
+
+
     <!----
         <div class="sponsors">
             <h1>Sponsors</h1>

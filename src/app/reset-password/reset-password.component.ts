@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -6,13 +8,15 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrl: './reset-password.component.css'
 })
 export class ResetPasswordComponent {
-  constructor(){}
+  constructor(private http:HttpClient,private router:Router){}
   @ViewChild('currentPassword') currentPassword !: ElementRef;
+  @ViewChild('roleId') roleId !: ElementRef;
   @ViewChild('newPassword') newPassword !: ElementRef;
   @ViewChild('confirmPassword') confirmPassword !: ElementRef;
 
   isVerified:number = 0;
   notSimilar:number = 0;
+  response:any;
 
   verify(){
     const currentPasswordValue = this.currentPassword.nativeElement.value;
@@ -33,20 +37,31 @@ export class ResetPasswordComponent {
   }
 
   
-  
-  /*
-  constructor(private emailService: EmailPasswordResetServiceService) {}
+  reset(){
+    let a = this.http.get(`http://localhost:8080/getUserByRoleId/${this.roleId?.nativeElement.value}`).subscribe(
+      (data) => {
+        console.log(data);
+        this.response = data;
 
-  onClickSendEmail() {
-    console.log("hello clicked");
-    const to = 'ajaykakunuri0507@gmail.com';
-    const subject = 'Test Email';
-    const text = 'This is a test email sent from Angular app.';
-    this.emailService.sendEmail(to, subject, text);
-    
-  }*/
+        this.response.password = this.newPassword?.nativeElement.value;
 
-  sendMail(){
+        this.http.post<any>("http://localhost:8080/updateUserByRoleId" , this.response).subscribe(
+          response => {
+            console.log('Response from backend:', response);
+
+            this.router.navigateByUrl('/log-in');
+          },
+          error => {
+            console.error('Error sending data to backend:', error);
+            // Handle error as needed
+          }
+        );
+
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
   }
 

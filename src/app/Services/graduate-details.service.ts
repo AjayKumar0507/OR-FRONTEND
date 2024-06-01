@@ -64,13 +64,11 @@ export class GraduateDetailsService {
     }
   }
 
-  async getJobsAppliedByroleId():Promise<any[]>{
+  async getAppointmentsByroleId():Promise<any[]>{
     let jobs:any[] = [];
 
     try{
-      
-      const data:any = await this.http.get(`http://localhost:8080/getJobsAppliedByRoleId/${this.graduateData.roleId}`).toPromise();
-      console.log(data);
+      const data:any = await this.http.get(`http://localhost:8080/getAppointmentsByRoleId/${this.graduateData.roleId}`).toPromise();
       return data;
     }
     catch(error){

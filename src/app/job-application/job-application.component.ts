@@ -36,6 +36,8 @@ export class JobApplicationComponent implements OnInit{
 
   employerName = "";
   employerMail = "";
+  resume2: File | undefined;
+
   
   appointment :Appointment = new Appointment();
   rolea : Role = new Role();
@@ -101,8 +103,8 @@ export class JobApplicationComponent implements OnInit{
         this.employerName = response.userName;
         this.employerMail = response.userEmail;
 
-        this.mailToEmployer();
-        this.sendMailToGraduate();
+        //this.mailToEmployer();
+        //this.sendMailToGraduate();
         this.addAppointments();
 
         this.router.navigateByUrl("/jobs");
@@ -136,6 +138,18 @@ export class JobApplicationComponent implements OnInit{
     }
   }
 
+  onFileSelected(event: any){
+    console.log('hello');
+    if(event.target.files && event.target.files.length > 0) {
+      // Fill file variable with the file content
+      this.resume2 = event.target.files[0];
+      console.log(this.resume2);
+    }
+    else{
+      console.log('file not selected');
+    }
+  }
+
   addAppointments(){
     
     console.log(this.dataService.jobData.jobId);
@@ -166,19 +180,15 @@ export class JobApplicationComponent implements OnInit{
         console.log(response);
         console.log('Response from backend:', response);
         this.response = response;
-        //this.router.navigateByUrl("/jobs");
-        // Handle response as needed
 
-        const formData: FormData = new FormData();
-        formData.append('resume', this.resume?.nativeElement.files[0]);
-        formData.append('jobId', this.response.jobId);
-
-        const headers = new HttpHeaders({
-          'Content-Type': 'multipart/form-data'
-        });
+        let body = new FormData();
+        if (this.resume2 !== undefined) {
+          body.append("file", this.resume2);
+        }
+        
 
         this.http.post<any>(`http://localhost:8080/updateAppointment/${this.response.jobId}` , 
-          this.resume?.nativeElement.files[0]
+          body
         ).subscribe(
           response => {
             console.log('Response from backend',response);

@@ -19,6 +19,7 @@ export class LogInComponent {
   @ViewChild('password') password!:any;
 
   errorMessage:boolean = false;
+  file!: Blob;
 
     
   constructor(private http:HttpClient,private router: Router,private dataService:DataService) {
@@ -28,7 +29,7 @@ export class LogInComponent {
   ngOnViewInit(){
     this.call();
   }
-  call(){
+  async call(){
     console.log('print');
   
   //  this.router.navigateByUrl('/signup');
@@ -42,6 +43,10 @@ export class LogInComponent {
       this.dataService.isAdmin = true;
       this.dataService.showLogIn = false;
       this.dataService.userLoggedIn = true;
+
+      const data2:any = await this.http.get(`http://localhost:8080/getAllAppointments`).toPromise();
+
+
       this.router.navigateByUrl('/welcome');
     }
     else{
@@ -77,3 +82,4 @@ export class LogInComponent {
   }
   
 }
+
