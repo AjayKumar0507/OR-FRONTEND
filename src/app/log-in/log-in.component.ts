@@ -44,7 +44,14 @@ export class LogInComponent {
       this.dataService.showLogIn = false;
       this.dataService.userLoggedIn = true;
 
-      const data2:any = await this.http.get(`http://localhost:8080/getAllAppointments`).toPromise();
+      this.dataService.userData = {
+        "role" : {
+          "roleId" : "admin",
+          "roleTitle":"admin"
+        }
+      }
+
+     // const data2:any = await this.http.get(`http://localhost:8080/getAllAppointments`).toPromise();
 
 
       this.router.navigateByUrl('/welcome');
@@ -63,6 +70,8 @@ export class LogInComponent {
             this.dataService.showLogIn = false;
             this.dataService.userLoggedIn = true;
             this.dataService.userData = data;
+            if(this.dataService.userData.role.roleTitle == "employer")
+              this.dataService.isEmployer = true;
             this.router.navigateByUrl("/welcome");
           }
           else{

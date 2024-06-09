@@ -1,14 +1,17 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { EmployersDetailsService } from '../Services/employers-details.service';
+import emailjs from '@emailjs/browser';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthGuardService } from '../Services/auth-guard.service';
+import { DataService } from '../Services/data.service';
 
 @Component({
-  selector: 'app-employer-jobs',
-  templateUrl: './employer-jobs.component.html',
-  styleUrl: './employer-jobs.component.css'
+  selector: 'app-employer-profile',
+  templateUrl: './employer-profile.component.html',
+  styleUrl: './employer-profile.component.css'
 })
-export class EmployerJobsComponent  {
+export class EmployerProfileComponent {
   
   jobs:any = {};
   @ViewChild('table') table: ElementRef|undefined;
@@ -36,7 +39,7 @@ export class EmployerJobsComponent  {
   password: any;
   
 
-  constructor(private employerDetailsService:EmployersDetailsService,private renderer:Renderer2,private http:HttpClient,private router: Router){}
+  constructor(private employerDetailsService:EmployersDetailsService,private renderer:Renderer2,private http:HttpClient,private router: Router ,public authService:AuthGuardService , public dataService:DataService ){}
 
   async ngOnInit() {
     try {
@@ -73,14 +76,31 @@ export class EmployerJobsComponent  {
     for(let i=0;i<Object.keys(this.jobs).length;i++){
 
       let tr1 = this.renderer.createElement('tr');
+
       
+      let td2 = this.renderer.createElement('td');
+      let anchor = this.renderer.createElement('a');
+      anchor.innerHTML = this.jobs[i].jobName;
+      
+      
+      this.renderer.setAttribute(anchor, "routerLink", "/job-profile"); 
+      this.renderer.setAttribute(anchor,"href" ,"#");
+
+      this.renderer.listen(anchor, 'click', (event) => {
+        event.preventDefault();
+
+        this.dataService.jobData = this.jobs[i];
+        console.log('Anchor clicked');
+        this.router.navigate(['/job-profile']);
+         
+      });
+
+      this.renderer.appendChild(td2,anchor);
+      this.renderer.appendChild(tr1, td2);
+
       let td1 = this.renderer.createElement('td');
       td1.innerHTML = this.jobs[i].company;
       this.renderer.appendChild(tr1,td1);
-
-      let td2 = this.renderer.createElement('td');
-      td2.innerHTML = this.jobs[i].jobName;
-      this.renderer.appendChild(tr1,td2);
 
       let td3 = this.renderer.createElement('td');
       td3.innerHTML = this.jobs[i].jobType;
@@ -108,11 +128,34 @@ export class EmployerJobsComponent  {
     }
   }
 
-  deleteEmployer(){
+  async deleteEmployer(){
 
     this.http.delete(`http://localhost:8080/deleteUserByRoleId/${this.roleId}`).subscribe(
-      response => {
+      async response => {
         console.log('Response from backend:', response);
+
+        emailjs.init('4rF1y6IRYUNj2kI-3');
+        let body = `Hello Employer
+          \n
+          We are very sorry to inform you , that the Admin has deleted your Account.
+          \n
+          Best wishes,
+          \nJobSeekho team`;
+
+        try {
+          let response = await emailjs.send( "service_ga6bnio","template_cqgom6d" , {
+            from_name: "JobSeekho",
+            body : body,
+            reply_to : this.userMail
+          });
+
+          console.log("Email sent:", response);
+          alert("Email sent");
+        } catch (error) {
+          console.error("Email sending failed:", error);
+          alert("Failed to send email. Please try again.");
+        }
+
         this.router.navigateByUrl('/employers-list');
       },
       error => {
@@ -126,7 +169,7 @@ export class EmployerJobsComponent  {
     this.showModal = !this.showModal;    
   }
 
-  edit(){
+  async edit(){
     let user = {
       userName : this.userName,
       userEmail:this.userMail,
@@ -160,8 +203,45 @@ export class EmployerJobsComponent  {
         console.log('Response from backend:', response);
         
         this.http.post<any>("http://localhost:8080/updateEmployerByRoleId" , employer).subscribe(
-          response => {
+          async response => {
             console.log('Response from backend:', response);
+
+            emailjs.init('4rF1y6IRYUNj2kI-3');
+            let body = `Hello User
+              \n
+              Admin has updated your information.
+              \n
+              Your Info : 
+              \nuserName : ${this.userName},
+              \nuserEmail:${this.userMail},
+              \npassword:${this.password},
+
+              \nnationality : ${this.nationality1?.nativeElement.value},
+              \nphoneNo:${this.phoneNo1?.nativeElement.value},
+              
+              \ncompany:${this.company1?.nativeElement.value},
+              \ncompanyAddress:${this.companyAddress1?.nativeElement.value},
+              \nsector:${this.sector1?.nativeElement.value},
+              \ncompanySize:${this.companySize1?.nativeElement.value},
+              \naddress:${this.address1?.nativeElement.value},
+              \n
+              Best wishes,
+              \nJobSeekho team`;
+
+            try {
+              let response = await emailjs.send( "service_ga6bnio","template_cqgom6d" , {
+                from_name: "JobSeekho",
+                body : body,
+                reply_to : this.userMail
+              });
+
+              console.log("Email sent:", response);
+              alert("Email sent");
+            } catch (error) {
+              console.error("Email sending failed:", error);
+              alert("Failed to send email. Please try again.");
+            }
+
             this.router.navigateByUrl('/employers-list');
           },
           error => {

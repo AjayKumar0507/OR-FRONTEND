@@ -9,14 +9,19 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AddJobComponent } from './add-job/add-job.component';
 import { EmployersListComponent } from './employers-list/employers-list.component';
 import { GraduatesListComponent } from './graduates-list/graduates-list.component';
-import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
 import { JobsListComponent } from './jobs-list/jobs-list.component';
 import { GraduateProfileComponent } from './graduate-profile/graduate-profile.component';
 import { JobProfileComponent } from './job-profile/job-profile.component';
+import { InboxComponent } from './inbox/inbox.component';
+import { OutboxComponent } from './outbox/outbox.component';
+import { PendingAppointmentsComponent } from './pending-appointments/pending-appointments.component';
+import { AcceptedAppointmentsComponent } from './accepted-appointments/accepted-appointments.component';
+import { EmployerProfileComponent } from './employer-profile/employer-profile.component';
 
 const routes: Routes = [
 
   {path:'',component:WelcomeComponent},
+  
   {path:'login',component:LogInComponent},
   {path:'signup',component:SignUpComponent},
   {path:'footer',component:FooterComponent},
@@ -26,12 +31,15 @@ const routes: Routes = [
   {path:'add-job',component:AddJobComponent},
   {path:'employers-list',component:EmployersListComponent},
   {path:'graduates-list',component:GraduatesListComponent},
-  {path:'employer-jobs',component:EmployerJobsComponent},
+  {path:'employer-profile',component:EmployerProfileComponent},
   {path:'jobs-list',component:JobsListComponent},
   {path:'graduate-profile',component:GraduateProfileComponent},
-  {path:'job-profile',component:JobProfileComponent}
+  {path:'job-profile',component:JobProfileComponent},
+  {path:'inbox',component:InboxComponent},
+  {path:'outbox',component:OutboxComponent},
+  {path:'pending-appointments',component:PendingAppointmentsComponent},
+  {path:'accepted-appointments',component:AcceptedAppointmentsComponent}
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

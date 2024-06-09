@@ -1,8 +1,11 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { GraduateDetailsService } from '../Services/graduate-details.service';
+import emailjs from '@emailjs/browser';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
+import { DataService } from '../Services/data.service';
+import { AuthGuardService } from '../Services/auth-guard.service';
 
 @Component({
   selector: 'app-graduate-profile',
@@ -44,7 +47,7 @@ export class GraduateProfileComponent {
   file !: Blob;
   
   
-  constructor(private graduateDetailsService:GraduateDetailsService,private renderer:Renderer2,private http:HttpClient , private router:Router){}
+  constructor(private graduateDetailsService:GraduateDetailsService,private renderer:Renderer2,private http:HttpClient , private router:Router,public dataService:DataService , public authService:AuthGuardService){}
 
   async ngOnInit() {
     try {
@@ -153,8 +156,31 @@ export class GraduateProfileComponent {
 
   deleteGraduate() {
     this.http.delete(`http://localhost:8080/deleteUserByRoleId/${this.roleId}`).subscribe(
-      response => {
+      async response => {
         console.log('Response from backend:', response);
+
+        emailjs.init('4rF1y6IRYUNj2kI-3');
+        let body = `Hello User
+          \n
+          We are very sorry to inform you , that the Admin has deleted your Account.
+          \n
+          Best wishes,
+          \nJobSeekho team`;
+
+        try {
+          let response = await emailjs.send( "service_ga6bnio","template_cqgom6d" , {
+            from_name: "JobSeekho",
+            body : body,
+            reply_to : this.userMail
+          });
+
+          console.log("Email sent:", response);
+          alert("Email sent");
+        } catch (error) {
+          console.error("Email sending failed:", error);
+          alert("Failed to send email. Please try again.");
+        }
+
         this.router.navigateByUrl('/graduates-list');
       },
       error => {
@@ -205,19 +231,57 @@ export class GraduateProfileComponent {
         console.log('Response from backend:', response);
         
         this.http.post<any>("http://localhost:8080/updateGraduate" , graduate).subscribe(
-          response => {
+          async response => {
             console.log('Response from backend:', response);
+            
+            emailjs.init('4rF1y6IRYUNj2kI-3');
+            let body = `Hello User
+              \n
+              Admin has updated your information.
+              \n
+              Your Info : 
+              \nuserName : ${this.userName},
+              \nuserEmail:${this.userMail},
+              \npassword:${this.password},
+
+              \nnationality : ${this.nationality1?.nativeElement.value},
+              \nphoneNo:${this.phoneNo1?.nativeElement.value},
+              \ncollegeName:${this.college1?.nativeElement.value},
+              \ncollegeAddress:${this.collegeAddress1?.nativeElement.value},
+              \ngender:${this.male?.nativeElement.checked ? 'Male' : 'Female'},
+              \ndateOfBirth : ${this.dateOfBirth1?.nativeElement.value} ,
+              \naddress:${this.address1?.nativeElement.value},
+              \nskills:${this.skills1?.nativeElement.value},
+              \nproject:${this.project1?.nativeElement.value},
+              \n
+              Best wishes,
+              \nJobSeekho team`;
+
+            try {
+              let response = await emailjs.send( "service_ga6bnio","template_cqgom6d" , {
+                from_name: "JobSeekho",
+                body : body,
+                reply_to : this.userMail
+              });
+
+              console.log("Email sent:", response);
+              alert("Email sent");
+            } catch (error) {
+              console.error("Email sending failed:", error);
+              alert("Failed to send email. Please try again.");
+            }
+
             this.router.navigateByUrl('/graduates-list');
           },
           error => {
             console.error('Error sending data to backend:', error);
-            // Handle error as needed
+            
           }
         );
       },
       error => {
         console.error('Error sending data to backend:', error);
-        // Handle error as needed
+        
       }
     );
     

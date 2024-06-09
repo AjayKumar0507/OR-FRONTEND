@@ -5,16 +5,16 @@
             <li>
                 <a routerLink="/welcome" >Home</a>
             </li>
+
             <li>
                 <a *ngIf="this.dataService.isAdmin != true" (click)="goToJobs()">Jobs for you</a>
             </li>
             <li>
                 <a *ngIf="this.dataService.isAdmin != true" (click)="goToAddJob()" >Add a Job</a>
             </li>
-            <li>
-                <a routerLink="/aboutUs">About Us</a>
-            </li>
+
             
+
             <li>
                 <a *ngIf="this.dataService.showLogIn" routerLink="login">Log In</a>
             </li>
@@ -34,8 +34,33 @@
                 <a  *ngIf="this.dataService.isAdmin" routerLink="/jobs-list">Jobs</a>
             </li>
 
+            <li *ngIf="this.dataService.userLoggedIn && this.dataService.userData.role.roleTitle=='employer' ">
+                <a href="#">Appointments</a>
+                <div class="submenu">
+                    <ul>
+                        <li><a (click)="openAccepted()" >Accepted</a></li>
+                        <li><a (click)="openPending()" >Pending</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li *ngIf="this.dataService.userLoggedIn" >
+                <a href="#">Messages</a>
+                <div class="submenu">
+                    <ul>
+                        <li><a (click)="openInbox()" >Inbox</a></li>
+                        <li><a (click)="openOutbox()" >Out Box</a></li>
+                    </ul>
+                </div>
+            </li>
+
             <li>
-                <a  *ngIf="this.dataService.userLoggedIn" class="logOut" (click)="logOut()">Log Out</a>
+                <div class="logout-area" *ngIf="this.dataService.userLoggedIn">
+                    <a  *ngIf="this.dataService.isAdmin" class="logOut" (click)="logOut()">Log Out</a>
+                    <a (click)="openProfile()" >
+                        <i class="fa-regular fa-user" *ngIf="this.dataService.isAdmin != true" ></i>
+                    </a>
+                </div>
             </li>
 
 

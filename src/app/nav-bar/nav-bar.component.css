@@ -44,11 +44,32 @@
     text-transform: uppercase;
 }
 
+.nav-bar ul li .submenu{
+    display: none;
+}
+
 a:active , a:hover{
     background-color: #00A5EC;
     transition: .5s;
 }
 
+.nav-bar ul li:hover .submenu{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: #5F6BF5;
+    color: whitesmoke;
+    font-size: 17px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    line-height: 10px;
+}
+
+
+.nav-bar ul li:hover .submenu li a:hover{
+    background-color: #00A5EC;
+    transition: .5s;
+}
 
 .nav-bar ul li a:hover{
     color: white;

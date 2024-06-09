@@ -1,6 +1,6 @@
 <img src="../../assets/login/pexels-pixabay-461064.jpg" alt="">
 <div class="parent" *ngIf="showModal!=true">
-    <h1>Graduate Profile</h1>
+    <h1>Job Profile</h1>
 
     <div class="employer-details">
         <div class="employer-info">
@@ -8,9 +8,10 @@
                 <div class="name">
                     <h3>{{jobName}}</h3>
                 </div>
+
                 <div class="btn">
-                    <button (click)="deleteJob()" >Remove Job</button>
-                    <button class="green" (click)="editJob()" >Edit Job</button>
+                    <button (click)="deleteJob()"  *ngIf="this.dataService.isAdmin"  >Remove Job</button>
+                    <button class="green" (click)="editJob()"  *ngIf="this.dataService.isAdmin != true"   >Edit Job</button>
                 </div>
                 
             </div>

@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { DataService } from '../Services/data.service';
 import { Router, RouterModule } from '@angular/router';
+import { AuthGuardService } from '../Services/auth-guard.service';
+import { HttpClient } from '@angular/common/http';
+import { GraduateDetailsService } from '../Services/graduate-details.service';
+import { EmployersDetailsService } from '../Services/employers-details.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,7 +17,9 @@ export class NavBarComponent {
   dataService:any;
 
 
-  constructor(public dataServices:DataService , private router:Router){
+  constructor(public dataServices:DataService , private router:Router,private authService:AuthGuardService,private http:HttpClient,
+    private graduateDetailsService:GraduateDetailsService , private employerDetailsService:EmployersDetailsService
+  ){
     this.dataService = dataServices;
     if(this.dataService.showLogIn == false){
       this.showLogInSignup = false;
@@ -31,7 +37,7 @@ export class NavBarComponent {
       }
       else
         alert("You are not a employer to add job");
-      }
+    }
   }
 
   goToJobs(){
@@ -50,7 +56,48 @@ export class NavBarComponent {
     this.dataService.userLoggedIn = false;
     this.dataService.showLogIn = true;
 
+    localStorage.clear();
+    sessionStorage.clear();
+
+    this.authService.logout();
     this.router.navigateByUrl("/welcome");
   }
   
+  openAccepted(){
+    if( this.dataService.userData.role.roleTitle == "employer" ){
+      this.router.navigateByUrl("/accepted-appointments");
+    }
+    else
+      alert("You are not a employer to add job");
+  
+  }
+
+  openPending(){
+    if( this.dataService.userData.role.roleTitle == "employer" ){
+      this.router.navigateByUrl("/pending-appointments");
+    }
+    else
+      alert("You are not a employer to add job");
+  }
+
+  openInbox(){
+    this.router.navigateByUrl("/inbox");
+  }
+
+  openOutbox(){
+    this.router.navigateByUrl("/outbox");
+  }
+
+
+  async openProfile(){
+    
+    if(this.dataService.userData.role.roleTitle == "employer"){
+      this.employerDetailsService.getEmployerDetails();
+    }
+    else{
+      this.graduateDetailsService.getGraduateDetails();
+    }
+
+  }
+
 }

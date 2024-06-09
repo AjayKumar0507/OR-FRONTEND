@@ -12,5 +12,7 @@ export class Appointment {
     skills !: string;
     project !: string;
     resume !: null;
-    rolea !: Role
+    status !: string;
+    employerId !: string;
+    rolea !: Role;
 }

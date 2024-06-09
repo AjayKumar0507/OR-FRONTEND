@@ -10,8 +10,9 @@
                     <h3>{{userName}}</h3>
                 </div>
                 <div class="btn">
-                    <button (click)="deleteEmployer()" >Remove Employer</button>
-                    <button class="green" (click)="editEmployer()" >Edit Employer</button>
+                    <button (click)="deleteEmployer()"  *ngIf="this.dataService.isAdmin" >Remove Employer</button>
+                    <button class="green" (click)="editEmployer()" *ngIf="this.dataService.isAdmin != true" >Edit Employer</button>
+                    <button (click)="this.authService.logout()" *ngIf="this.dataService.isAdmin != true" >Log Out</button>
                 </div>
                 
             </div>
@@ -66,6 +67,7 @@
                         <p>{{companyAddress}}</p>
                     </div>
                 </div>
+                
                 <div class="details">
                     <i class="fa-solid fa-industry"></i>
                     <div class="d1">
@@ -113,7 +115,7 @@
         </div>
         <div class="unchanged">
             <label for="">userMail</label>
-            <p>abc</p>
+            <p>{{userMail}}</p>
         </div>
 
         <div class="input-div">

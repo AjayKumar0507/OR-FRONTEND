@@ -145,7 +145,7 @@ export class SignUpComponent implements AfterViewInit {
         let response = await emailjs.send("service_m2ph37g","template_3hqekks", {
           from_name: "ajay",
           roleId: roleId, 
-          reply_to: this.form.value.reply_to,
+          reply_to: this.email,
         });
 
         console.log("Email sent:", response);

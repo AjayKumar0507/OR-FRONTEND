@@ -40,14 +40,14 @@ export class EmployersListComponent implements OnInit {
       
       
       
-      this.renderer.setAttribute(anchor, "routerLink", "/employer-jobs"); 
+      this.renderer.setAttribute(anchor, "routerLink", "/employer-profile"); 
       this.renderer.setAttribute(anchor,"href" ,"#");
       this.renderer.listen(anchor, 'click', (event) => {
         event.preventDefault();
 
         console.log('Anchor clicked');
         this.employerDetailsService.employerData = this.employers[i];
-        this.router.navigate(['/employer-jobs']);
+        this.router.navigate(['/employer-profile']);
          
       });
       this.renderer.appendChild(td1,anchor);

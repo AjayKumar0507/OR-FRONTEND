@@ -41,7 +41,7 @@ export class GraduatesListComponent implements OnInit {
       anchor.innerHTML = this.graduates[i].userName;
       
       
-      this.renderer.setAttribute(anchor, "routerLink", "/employer-jobs"); 
+      this.renderer.setAttribute(anchor, "routerLink", "/graduate-profile"); 
       this.renderer.setAttribute(anchor,"href" ,"#");
 
       this.renderer.listen(anchor, 'click', (event) => {

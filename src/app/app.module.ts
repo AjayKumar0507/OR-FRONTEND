@@ -19,6 +19,12 @@ import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
 import { JobsListComponent } from './jobs-list/jobs-list.component';
 import { GraduateProfileComponent } from './graduate-profile/graduate-profile.component';
 import { JobProfileComponent } from './job-profile/job-profile.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
+import { InboxComponent } from './inbox/inbox.component';
+import { OutboxComponent } from './outbox/outbox.component';
+import { AcceptedAppointmentsComponent } from './accepted-appointments/accepted-appointments.component';
+import { PendingAppointmentsComponent } from './pending-appointments/pending-appointments.component';
+import { EmployerProfileComponent } from './employer-profile/employer-profile.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +43,13 @@ import { JobProfileComponent } from './job-profile/job-profile.component';
     EmployerJobsComponent,
     JobsListComponent,
     GraduateProfileComponent,
-    JobProfileComponent
+    JobProfileComponent,
+    AppointmentsComponent,
+    InboxComponent,
+    OutboxComponent,
+    AcceptedAppointmentsComponent,
+    PendingAppointmentsComponent,
+    EmployerProfileComponent
   ],
   imports: [
     BrowserModule,

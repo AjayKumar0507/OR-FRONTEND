@@ -66,7 +66,7 @@ export class JobsListComponent {
       anchor.innerHTML = this.jobs[i].jobName;
       
       
-      this.renderer.setAttribute(anchor, "routerLink", "/employer-jobs"); 
+      this.renderer.setAttribute(anchor, "routerLink", "/job-profile"); 
       this.renderer.setAttribute(anchor,"href" ,"#");
 
       this.renderer.listen(anchor, 'click', (event) => {

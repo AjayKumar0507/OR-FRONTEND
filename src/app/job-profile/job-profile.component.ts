@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../Services/data.service';
+import emailjs from '@emailjs/browser';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Job } from '../modal/job';
@@ -11,8 +12,9 @@ import { Job } from '../modal/job';
   styleUrl: './job-profile.component.css'
 })
 export class JobProfileComponent implements OnInit{
+  userEmail: any;
 
-  constructor(private dataService:DataService,private http:HttpClient , private router:Router){}
+  constructor(public dataService:DataService,private http:HttpClient , private router:Router){}
 
   showModal = false;
   jobName: any;
@@ -43,11 +45,13 @@ export class JobProfileComponent implements OnInit{
     this.description =  this.dataService.jobData.jobDescription;
     
     let response : any;
-    let a = this.http.get(`http://localhost:8080/getUserByRoleId/${this.dataService.jobData.roles.roleId}`).subscribe(
+    let a = await this.http.get(`http://localhost:8080/getUserByRoleId/${this.dataService.jobData.roles.roleId}`).subscribe(
         (data) => {
           response = data;
           this.employer = response.userName;
+          this.userEmail = response.userEmail;
           this.roleId = this.dataService.jobData.roles.roleId;
+          console.log(this.userEmail);
         },
         (error) => {
           console.log(error);
@@ -58,8 +62,33 @@ export class JobProfileComponent implements OnInit{
 
   deleteJob() {
     this.http.delete(`http://localhost:8080/deleteJob/${this.dataService.jobData.jobId}`).subscribe(
-      response => {
+      async response => {
         console.log('Response from backend:', response);
+
+        emailjs.init('4rF1y6IRYUNj2kI-3');
+        let body = `Hello Employer
+          \n
+          We are very sorry to inform you , that the Admin has deleted the job you posted.
+          \nJob Details : 
+
+          \n
+          Best wishes,
+          \nJobSeekho team`;
+
+        try {
+          let response = await emailjs.send( "service_ga6bnio","template_cqgom6d" , {
+            from_name: "JobSeekho",
+            body : body,
+            reply_to : this.userEmail
+          });
+
+          console.log("Email sent:", response);
+          alert("Email sent");
+        } catch (error) {
+          console.error("Email sending failed:", error);
+          alert("Failed to send email. Please try again.");
+        }
+
         this.router.navigateByUrl('/jobs-list');
       },
       error => {
@@ -86,8 +115,42 @@ export class JobProfileComponent implements OnInit{
     }
 
     this.http.post<any>(`http://localhost:8080/updateJob/${this.dataService.jobData.jobId}` , this.job).subscribe(
-          response => {
+          async response => {
             console.log('Response from backend:', response);
+
+            
+            emailjs.init('4rF1y6IRYUNj2kI-3');
+            let body = `Hello Employer
+              \n
+              Admin has updated your  job information.
+              \n
+              Job Info :
+              \njobName : ${this.dataService.jobData.jobName},
+              \njobType : ${this.dataService.jobData.jobType},
+              \njobDescription : ${this.description1?.nativeElement.value},
+              \njobSalary : ${this.salary1?.nativeElement.value},
+              \ncompany : ${this.company1?.nativeElement.value},
+              \njobLocation : ${this.location1?.nativeElement.value},
+              \njobVacancy :${ this.vacancy1?.nativeElement.value},
+              \n
+              Best wishes,
+              \nJobSeekho team`;
+
+            try {
+              let response = await emailjs.send( "service_ga6bnio","template_cqgom6d" , {
+                from_name: "JobSeekho",
+                body : body,
+                reply_to : this.userEmail
+              });
+
+              console.log("Email sent:", response);
+              alert("Email sent");
+            } catch (error) {
+              console.error("Email sending failed:", error);
+              alert("Failed to send email. Please try again.");
+            }
+
+
             this.router.navigateByUrl('/jobs-list');
           },
           error => {

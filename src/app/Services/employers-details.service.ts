@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployersDetailsService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private router:Router,private dataService:DataService) { }
 
   response1:any = {};
   response2:any = {};
@@ -91,5 +93,54 @@ export class EmployersDetailsService {
     
   }
   
+  async getEmployerDetails(){
+    let employer = {
+      roleId: this.dataService.userData.role.roleId,
+      userName: "",
+      email: "",
+      phoneNo: '',
+      address: "",
+      nationality: "",
+      company: "",
+      companyAddress: "",
+      sector: "" ,
+      companySize: ""
+    };
+
+    try {
+      const userData: any = await this.http.get(`http://localhost:8080/getUserByRoleId/${this.dataService.userData.role.roleId}`).toPromise();
+      
+      if (userData != null) {
+        employer.roleId = this.dataService.userData.role.roleId;
+        employer.userName = userData.userName;
+        employer.email = userData.userEmail;
+        employer.phoneNo = userData.phoneNo;
+        employer.nationality = userData.nationality;
+
+        try{
+          const userData: any = await this.http.get(`http://localhost:8080/getUserByRoleId/${this.dataService.userData.role.roleId}`).toPromise();
+
+          if(userData != null){
+            employer.userName = userData.userName;
+            employer.email = userData.userEmail;
+            employer.phoneNo = userData.phoneNo;
+            employer.nationality = userData.nationality;
+
+            this.employerData = employer;
+            console.log('Anchor clicked');
+            this.router.navigate(['/employer-profile']);
+
+          }
+
+        }catch(error){
+          console.log('Error fetching graduate data',error);
+        }
+
+      }
+      
+    } catch (error) {
+      console.log('Error fetching user data:', error);
+    }
+  }
 
 }

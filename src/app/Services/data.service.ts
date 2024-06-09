@@ -9,6 +9,8 @@ export class DataService {
 
   isAdmin:boolean  = false;
 
+  isEmployer:boolean = false;
+
   userLoggedIn:boolean = false;
 
   showLogIn:boolean = true;

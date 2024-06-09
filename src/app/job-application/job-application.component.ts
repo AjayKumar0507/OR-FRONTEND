@@ -17,6 +17,7 @@ export class JobApplicationComponent implements OnInit{
 
   
   @ViewChild('fullName') fullName: ElementRef | undefined;
+  @ViewChild('email') email: ElementRef | undefined;
   @ViewChild('collegeName') collegelName: ElementRef | undefined;
   @ViewChild('collegeAddress') collegeAddress: ElementRef | undefined;
   @ViewChild('yearOfPassing') yearOfPassing: ElementRef | undefined;
@@ -50,12 +51,16 @@ export class JobApplicationComponent implements OnInit{
     this.salary = this.dataService.jobData.jobSalary;
     this.jobDescription = this.dataService.jobData.jobDescription;
     this.noOfOpenings = this.dataService.jobData.jobVacancy;
+
   }
 
   async mailToEmployer(){
     emailjs.init('4rF1y6IRYUNj2kI-3');
-    const formData = new FormData();
-    formData.append('file', this.resume?.nativeElement.files[0]);
+    let body = new FormData();
+    if (this.resume2 !== undefined) {
+      body.append("file", this.resume2);
+    }
+    
     console.log(this.employerMail);
     try {
       let response = await emailjs.send( "service_ga6bnio","template_bb2qrux" , {
@@ -71,7 +76,7 @@ export class JobApplicationComponent implements OnInit{
         jobVacancy : this.dataService.jobData.jobVacancy,
 
         userName : this.dataService.userData.userName,
-        userEmail : this.dataService.userData.userEmail,
+        userEmail : this.email?.nativeElement.value,
         collegeName : this.collegelName?.nativeElement.value,
         collegeAddress : this.collegeAddress?.nativeElement.value,
         yearOfPassing : this.yearOfPassing?.nativeElement.value,
@@ -79,7 +84,7 @@ export class JobApplicationComponent implements OnInit{
         skills : this.skills?.nativeElement.value,
         project : this.project?.nativeElement.value,
         phoneNo : this.dataService.userData.phoneNo,
-        resume : formData,
+        resume : body,
 
         reply_to : this.employerMail
       });
@@ -92,10 +97,11 @@ export class JobApplicationComponent implements OnInit{
     }
   }
 
-  sendMailToEmployer(){
+  async sendMailToEmployer(){
 
+    
     let response:any;
-    let a = this.http.get(`http://localhost:8080/getUserByRoleId/${this.dataService.userData.role.roleId}`).subscribe(
+    let a = await this.http.get(`http://localhost:8080/getUserByRoleId/${this.dataService.jobData.roles.roleId}`).subscribe(
       (data) => {
         console.log(1);
         console.log(data);
@@ -120,14 +126,22 @@ export class JobApplicationComponent implements OnInit{
   async sendMailToGraduate(){
     emailjs.init('4rF1y6IRYUNj2kI-3');
     console.log(this.dataService.userData.userEmail);
+    let body = `Hello ${this.dataService.userData.userName},
+      \n
+      Thank You for applying ${this.dataService.jobData.jobName} in ${this.dataService.jobData.company}.
+      \n
+      The employer will contact you soon, if your qualifications meet the requirements.
+      \n
+      Apply for more jobs are JobSeekho😊
+      \n
+      Best wishes,
+      JobSeekho team`;
+
     try {
       let response = await emailjs.send( "service_ga6bnio","template_cqgom6d" , {
         from_name: "JobSeekho",
-        userName : this.dataService.userData.userName,
-        jobName : this.dataService.jobData.jobName,
-        companyName : this.dataService.jobData.company,
-
-        reply_to : this.dataService.userData.userEmail
+        body : body,
+        reply_to : this.email?.nativeElement.value
       });
 
       console.log("Email sent:", response);
@@ -163,7 +177,7 @@ export class JobApplicationComponent implements OnInit{
     this.appointment = {
       jobId: this.dataService.jobData.jobId,
       fullName: this.dataService.userData.userName,
-      email: this.dataService.userData.userEmail,
+      email: this.email?.nativeElement.value,
       phoneNo: this.dataService.userData.phoneNo,
       college: this.collegelName?.nativeElement.value,
       collegeAddress: this.collegeAddress?.nativeElement.value,
@@ -171,6 +185,8 @@ export class JobApplicationComponent implements OnInit{
       percentage: this.percentage?.nativeElement.value,
       skills: this.skills?.nativeElement.value,
       project: this.project?.nativeElement.value,
+      employerId : this.dataService.jobData.roles.roleId,
+      status : "pending",
       resume:null,
       rolea: this.rolea
     }
@@ -187,11 +203,15 @@ export class JobApplicationComponent implements OnInit{
         }
         
 
-        this.http.post<any>(`http://localhost:8080/updateAppointment/${this.response.jobId}` , 
+        this.http.post<any>(`http://localhost:8080/updateAppointment/${this.response.id}` , 
           body
         ).subscribe(
-          response => {
+          async response => {
             console.log('Response from backend',response);
+            console.log(this.dataService.jobData.roles.roleId);
+            
+
+
           },
           error => {
             console.error('Error sending file to backend',error);

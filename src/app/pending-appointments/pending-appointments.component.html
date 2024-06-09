@@ -1,0 +1,82 @@
+<img src="../../assets/login/pexels-pixabay-461064.jpg" alt="">
+
+<div class="parent">
+    <div class="employer-details">
+        <div class="jobs-info">
+            <h2>Pending</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>phone No</th>
+                        <th>college</th>
+                        <th>College Address</th>
+                        <th>Year of Passing</th>
+                        <th>Skills</th>
+                        <th>Percentage</th>
+                        <th>Project</th>
+                        <th>Resume</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody #table1>
+                    
+                    <!--
+                        <tr>
+                        <td>AjayKumar</td>
+                        <td>ajay20045gmail.com</td>
+                        <td>6305280351</td>
+                        <td>VIGNAN</td>
+                        <td>guntur</td>
+                        <td>2026</td>
+                        <td>java</td>
+                        <td>96</td>
+                        <td>asdfg</td>
+                        <td>
+                            <button class="download dd">Resume</button>
+                        </td>
+                        <td>
+                            <div class="btn-area">
+                                <button class="green" >Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </td>
+                    </tr>
+                    -->
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" *ngIf="this.showModal" >
+    <div class="overlay hidden"></div>
+    <div class="form">
+        
+        <div class="personal-info">
+            <!--
+                
+            <button class="close-modal" (click)="compose()" >&times;</button>
+            -->
+            <h3>Schedule Appointment</h3>
+        <div class="dob-div">
+            <label for="DOB">Date of Birth&nbsp;</label>
+            <input type="date" id="DOB" name="DOB" required placeholder="dd-mm-yyyy" #dob>
+
+        </div>
+        <div class="nationality">
+            <label for="nationality"> Company size</label>
+            <select name="nationality" id="nationality" required #timeSlot>
+                <option value="0">Select Slot</option>
+                <option value="10.00 AM">10.00 AM </option>
+                <option value="4.00 PM">4.00 PM</option>
+                <option value="7.00 PM">7.00 PM</option>
+            </select>
+        </div>
+        <input type="submit" value="SEND" class="btn" (click)="sendAppointment()" >
+        </div>
+    </div>  
+</div>

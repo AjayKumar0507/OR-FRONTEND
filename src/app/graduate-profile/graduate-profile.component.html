@@ -9,8 +9,9 @@
                     <h3>{{userName}}</h3>
                 </div>
                 <div class="btn">
-                    <button (click)="deleteGraduate()" >Remove Graduate</button>
-                    <button class="green" (click)="editGraduate()" >Edit Graduate</button>
+                    <button (click)="deleteGraduate()" *ngIf="this.dataService.isAdmin" >Remove Graduate</button>
+                    <button class="green" (click)="editGraduate()" *ngIf="this.dataService.isAdmin != true" >Edit Graduate</button>
+                    <button (click)="this.authService.logout()" *ngIf="this.dataService.isAdmin != true" >Log Out</button>
                 </div>
                 
             </div>
