@@ -12,14 +12,23 @@ export class JobsComponent  implements OnInit{
   constructor(private renderer: Renderer2, private el: ElementRef ,private http: HttpClient,private router:Router , private dataService:DataService) {}
 
   jobs:any  = {};
+  filteredJobs:any = {};
+  searchValue :any;
+  locationValue = "Location";
+  salaryValue = "Select salary";
 
   @ViewChild('jobscontainer') jobscontainer!: ElementRef;
+  @ViewChild('searchInput') searchInput!: ElementRef;
+  @ViewChild('sector') sector!: ElementRef;
+  @ViewChild('salary') salary!: ElementRef;
+  @ViewChild('location') location!: ElementRef;
 
   ngOnInit(){
 
     this.http.get("http://localhost:8080/getAllJobs").subscribe(
       (data) => {
         this.jobs = data;
+        this.filteredJobs = data;
         this.generateJobComponents();
       },
       (error) => {
@@ -30,17 +39,22 @@ export class JobsComponent  implements OnInit{
   }
 
   generateJobComponents(){
-    const length = Object.keys(this.jobs).length;
+    const length = Object.keys(this.filteredJobs).length;
     for(let i =0;i<length;i++){
       console.log(this.jobs[i]);
     }
 
+    const tableElement = this.jobscontainer?.nativeElement;
+    while (tableElement.firstChild) {
+      this.renderer.removeChild(tableElement, tableElement.firstChild);
+    }
+
     for(let i=0;i<length;i++){
       
-      let jobName = this.jobs[i].jobName;
-      let jobSalary = this.jobs[i].jobSalary+"k";
-      let jobLocation = this.jobs[i].jobLocation;
-      let company = this.jobs[i].company;
+      let jobName = this.filteredJobs[i].jobName;
+      let jobSalary = this.filteredJobs[i].jobSalary+"k";
+      let jobLocation = this.filteredJobs[i].jobLocation;
+      let company = this.filteredJobs[i].company;
 
       let jobdiv = this.renderer.createElement('div');
       this.renderer.addClass(jobdiv,"job");
@@ -159,7 +173,7 @@ export class JobsComponent  implements OnInit{
         }
         else{
           console.log('Anchor clicked');
-          this.dataService.jobData = this.jobs[i];
+          this.dataService.jobData = this.filteredJobs[i];
           console.log(this.dataService.jobData);
           this.router.navigate(['/job-application']);
         }
@@ -192,10 +206,66 @@ export class JobsComponent  implements OnInit{
     }
   }
 
-  call() {
+  filterJobs() {
+    console.log(this.location?.nativeElement.value);
+    console.log(this.sector?.nativeElement.value);
+    console.log(this.salary?.nativeElement.value);
+    console.log(this.location?.nativeElement.value);
+  
+    this.filteredJobs = [];
     
+    if(this.searchInput?.nativeElement.value != null){
+      this.filteredJobs = [...this.filteredJobs, ...this.jobs.filter(
+        (j: { jobName: string | any[]; company: string | any[]; }) => {
+          return j.jobName.includes(this.searchInput?.nativeElement.value) || j.company.includes(this.searchInput?.nativeElement.value) ;
+        }
+      )];
+    }
+  
     
+    if(this.salary?.nativeElement.value != "Select salary"){
+      this.filteredJobs = [...this.filteredJobs, ...this.jobs.filter(
+        (j: { jobSalary: string; }) => {
+          const salaryValue = this.salary?.nativeElement.value;
+          console.log(parseInt(j.jobSalary.replace(/,/g, '')));
+          if (salaryValue == "< 50,000") {
+            return parseInt(j.jobSalary.replace(/,/g, '')) <= 50000;
+          }
+          else if (salaryValue == "50,000 - 1,00,000") {
+            return parseInt(j.jobSalary.replace(/,/g, '')) > 50000 && parseInt(j.jobSalary.replace(/,/g, '')) <= 100000;
+          }
+          else if (salaryValue == "1,00,000 - 2,00,000") {
+            return parseInt(j.jobSalary.replace(/,/g, '')) > 100000 && parseInt(j.jobSalary.replace(/,/g, '')) <= 200000;
+          }
+          else if (salaryValue == "> 2,00,000") {
+            return parseInt(j.jobSalary.replace(/,/g, '')) > 200000;
+          }
+          else
+            return false;
+        }
+      )];
+    }
+  
+    if(this.location?.nativeElement.value != "Location"){
+      this.filteredJobs = [...this.filteredJobs, ...this.jobs.filter(
+        (j: { jobName: string | any[]; sector: string | any[]; salary: string | any[]; jobLocation: string | any[]; }) => {
+          return j.jobLocation.includes(this.location?.nativeElement.value);
+        }
+      )];
+    }
+  
+    console.log(this.filteredJobs);
+    this.filteredJobs = [...new Set(this.filteredJobs)];  
+  
+    this.generateJobComponents();
+  }
 
+  resetFilters(){
+    this.searchValue = "";
+    this.locationValue = "Location";
+    this.salaryValue = "Select salary";
+    this.filteredJobs = this.jobs;
+    this.generateJobComponents();
   }
 
 }

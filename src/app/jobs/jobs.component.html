@@ -4,6 +4,36 @@
     <h1>Latest Jobs in JobSeekho</h1>
 </div>
 
+
+<div class="search-div">
+    <div class="input-div">
+        <input type="text" id="fullName" class="input-field" name="fullName" placeholder="Search"
+            required (change)="filterJobs()" value="{{searchValue}}" #searchInput  >
+    </div>
+    <div class="nationality">
+        <label for="nationality">Nationality</label>
+        <select name="nationality" id="nationality" [value]="locationValue" #location>
+            <option value="Location">Location</option>
+            <option value="India">India</option>
+            <option value="America">America</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Canada">Canada</option>
+            <option value="China">china</option>
+        </select>
+    </div>
+    <div class="nationality">
+        <label for="">Salary</label>
+        <select name="nationality" id="nationality"  [value]="salaryValue" #salary>
+            <option value="Select salary">Select salary</option>
+            <option value="50,000">  < 50,000</option>
+            <option value="50,000 - 1,00,000">50,000 - 1,00,000</option>
+            <option value="1,00,000 - 2,00,000">1,00,000 - 2,00,000</option>
+            <option value="> 2,00,000">> 2,00,000</option>
+        </select>
+    </div>
+    <button (click)="resetFilters()" class="btn">Clear</button>
+</div>
+
 <div class="container">
     
     <div class="jobs-container" #jobscontainer>

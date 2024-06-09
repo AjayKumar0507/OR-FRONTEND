@@ -15,7 +15,6 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AddJobComponent } from './add-job/add-job.component';
 import { EmployersListComponent } from './employers-list/employers-list.component';
 import { GraduatesListComponent } from './graduates-list/graduates-list.component';
-import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
 import { JobsListComponent } from './jobs-list/jobs-list.component';
 import { GraduateProfileComponent } from './graduate-profile/graduate-profile.component';
 import { JobProfileComponent } from './job-profile/job-profile.component';
@@ -40,7 +39,6 @@ import { EmployerProfileComponent } from './employer-profile/employer-profile.co
     AddJobComponent,
     EmployersListComponent,
     GraduatesListComponent,
-    EmployerJobsComponent,
     JobsListComponent,
     GraduateProfileComponent,
     JobProfileComponent,
