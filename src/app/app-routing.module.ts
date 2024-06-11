@@ -17,6 +17,8 @@ import { OutboxComponent } from './outbox/outbox.component';
 import { PendingAppointmentsComponent } from './pending-appointments/pending-appointments.component';
 import { AcceptedAppointmentsComponent } from './accepted-appointments/accepted-appointments.component';
 import { EmployerProfileComponent } from './employer-profile/employer-profile.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 
 const routes: Routes = [
 
@@ -38,7 +40,9 @@ const routes: Routes = [
   {path:'inbox',component:InboxComponent},
   {path:'outbox',component:OutboxComponent},
   {path:'pending-appointments',component:PendingAppointmentsComponent},
-  {path:'accepted-appointments',component:AcceptedAppointmentsComponent}
+  {path:'accepted-appointments',component:AcceptedAppointmentsComponent},
+  {path:'about-us',component:AboutUsComponent},
+  {path:'admin-profile',component:AdminProfileComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

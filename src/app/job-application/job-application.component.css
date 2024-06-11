@@ -303,36 +303,3 @@ input{
 }
 
 
-
-.sponsors{
-    scroll-margin-top:8rem ;
-    width: 23%;
-    height: 25%;
-    background-color: #d9e5f4;
-    border-radius: 15px;
-    padding: 1rem;
-    margin: 1rem;
-    margin-left: 2rem;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-    transition: .5s;
-}
-.company{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    width: 100%;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding-left: 10px;
-}
-
-.sponsors img{
-    width: 50px;
-    border-radius: 25px;
-    margin-right: 20px;
-}

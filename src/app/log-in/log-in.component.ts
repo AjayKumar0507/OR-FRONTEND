@@ -51,10 +51,7 @@ export class LogInComponent {
         }
       }
 
-     // const data2:any = await this.http.get(`http://localhost:8080/getAllAppointments`).toPromise();
-
-
-      this.router.navigateByUrl('/welcome');
+      this.router.navigateByUrl('/admin-profile');
     }
     else{
       console.log(userEmail);

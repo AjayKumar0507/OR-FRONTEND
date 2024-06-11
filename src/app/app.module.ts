@@ -24,6 +24,8 @@ import { OutboxComponent } from './outbox/outbox.component';
 import { AcceptedAppointmentsComponent } from './accepted-appointments/accepted-appointments.component';
 import { PendingAppointmentsComponent } from './pending-appointments/pending-appointments.component';
 import { EmployerProfileComponent } from './employer-profile/employer-profile.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { EmployerProfileComponent } from './employer-profile/employer-profile.co
     OutboxComponent,
     AcceptedAppointmentsComponent,
     PendingAppointmentsComponent,
-    EmployerProfileComponent
+    EmployerProfileComponent,
+    AdminProfileComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

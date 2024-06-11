@@ -217,7 +217,7 @@ a{
 .unchanged {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: space-between;
     margin-left: 220px;
     
     width: 80%;
@@ -234,7 +234,7 @@ a{
     width: 45%;
     height: 40px;
     margin-top: 10px;
-    margin-left: 150px;
+    margin-right: 220px;
     
     color: black;
     background-color: whitesmoke;
@@ -320,7 +320,7 @@ input{
 .dob-div{
     display: flex;
     justify-content: space-evenly;
-    width: 61%;
+    width: 60%;
     margin-bottom: 10px;
 }
 .dob-div label{
@@ -332,6 +332,7 @@ input{
 }
 .dob-div input{
     padding-left: 10px;
+    padding-right: 10px;
     width: 68%;
     height: 40px;
     margin: 10px 0;

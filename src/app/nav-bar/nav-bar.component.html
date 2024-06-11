@@ -5,16 +5,15 @@
             <li>
                 <a routerLink="/welcome" >Home</a>
             </li>
-
+            <li>
+                <a routerLink="/about-us" *ngIf="this.dataService.isAdmin != true" >About Us</a>
+            </li>
             <li>
                 <a *ngIf="this.dataService.isAdmin != true" (click)="goToJobs()">Jobs for you</a>
             </li>
             <li>
                 <a *ngIf="this.dataService.isAdmin != true" (click)="goToAddJob()" >Add a Job</a>
             </li>
-
-            
-
             <li>
                 <a *ngIf="this.dataService.showLogIn" routerLink="login">Log In</a>
             </li>

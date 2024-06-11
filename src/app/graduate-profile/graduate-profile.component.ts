@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
 import { DataService } from '../Services/data.service';
 import { AuthGuardService } from '../Services/auth-guard.service';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-graduate-profile',
@@ -47,7 +48,7 @@ export class GraduateProfileComponent {
   file !: Blob;
   
   
-  constructor(private graduateDetailsService:GraduateDetailsService,private renderer:Renderer2,private http:HttpClient , private router:Router,public dataService:DataService , public authService:AuthGuardService){}
+  constructor(private graduateDetailsService:GraduateDetailsService,private renderer:Renderer2,private http:HttpClient , private router:Router,public dataService:DataService , public authService:AuthGuardService ){}
 
   async ngOnInit() {
     try {

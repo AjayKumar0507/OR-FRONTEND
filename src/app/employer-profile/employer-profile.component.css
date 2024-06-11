@@ -203,7 +203,7 @@ a{
 .unchanged {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: space-between;
     margin-left: 220px;
     
     width: 80%;
@@ -220,7 +220,7 @@ a{
     width: 45%;
     height: 40px;
     margin-top: 10px;
-    margin-left: 150px;
+    margin-right: 220px;
     background-color: whitesmoke;
     border: 1px solid gray;
     border-radius: 10px;
