@@ -81,7 +81,7 @@ export class PendingAppointmentsComponent implements OnInit {
       this.renderer.appendChild(tr1,td7);
 
       let td9 = this.renderer.createElement('td');
-      td9.innerHTML = this.jobs[i].skills;
+      td9.innerHTML = this.jobs[i].percentage;
       this.renderer.appendChild(tr1,td9);
 
       let td8 = this.renderer.createElement('td');

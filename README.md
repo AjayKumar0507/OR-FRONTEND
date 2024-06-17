@@ -1,27 +1,76 @@
-# OnlineRecruitment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
 
-## Development server
+# Online Recruitment - Front-End
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Welcome to the Online Recruitment Front-End repository, an online job portal.
 
-## Code scaffolding
+## Table of Contents
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Overview](#overview)
+- [Getting Started](#getting-started)
+- [Contributing](#contributing)
+- [Contact](#contact)
 
-## Build
+## Overview
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+OR-FRONTEND is a part of Online Recruitment, developed using Angular. It provides user interface functionalities for job seekers to apply for jobs and for employers to post jobs.
 
-## Running unit tests
+### User Types
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. **Job Seeker**: Applies for jobs posted by employers.
+   - **Login**: Uses Gmail and roleId (sent via Gmail).
 
-## Running end-to-end tests
+2. **Employer**: Posts jobs and recruits job seekers.
+   - **Login**: Uses Gmail and roleId (sent via Gmail).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. **Admin**: Controls the entire application, with abilities including user and job deletion.
+   - **Login**: 
+     - Gmail: abc@gmail.com
+     - roleId: admin
+     - Password: gog89p13
 
-## Further help
+## Getting Started
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Follow these steps to get started with the project:
+
+1. Clone the repository:
+```git clone https://github.com/AjayKumar0507/OR-FRONTEND.git```
+
+2. Navigate to the project directory:
+```cd OR-FRONTEND```
+
+3. Install dependencies:
+```npm install```  For Node Modules
+
+```npm install -g @angular/cli``` and ```Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned```Angular CLI
+
+```npm install filesaver.js ``` and ```npm install ngx-file-save ``` FileSaver.js
+
+```npm install --save @emailjs/browser``` EmailJs
+
+4. Run the project:
+```ng serve```
+
+## Contributing
+
+Want to contribute? Follow these steps:
+
+1. Fork the repository.
+
+2. Create a new branch for your changes:
+```git branch <branch-name>```
+
+3. Make your changes and commit them:
+```git commit -m <commit-message>```
+
+4. Push your changes to your forked repository:
+```git push origin <branch-name>```
+
+5. Create a pull request to merge your changes into this repository.
+
+## Contact
+
+For any questions or concerns, reach out via email:
+- Email: ajaykakunuri200457@gmail.com
+
+Repository: [OR-FRONTEND](https://github.com/AjayKumar0507/OR-FRONTEND)

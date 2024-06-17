@@ -7,11 +7,21 @@ import { DataService } from './data.service';
   providedIn: 'root'
 })
 export class AuthGuardService {
-  constructor(private router: Router) {}
+  constructor(private router: Router,private dataService:DataService) {}
 
   logout() {
+    
+    this.dataService.isAdmin = false;
+    this.dataService.userData = {};
+    this.dataService.jobData = {};
+    this.dataService.jobPosterData = {};
+    this.dataService.userLoggedIn = false;
+    this.dataService.showLogIn = true;
+
+    localStorage.clear();
+    sessionStorage.clear();
     this.clearStorage();
-    this.router.navigateByUrl('/login', { replaceUrl: true }).then(() => {
+    this.router.navigateByUrl('/welcome', { replaceUrl: true }).then(() => {
       // Manipulate history after navigation is complete
       history.pushState(null, '', window.location.href);
       window.addEventListener('popstate', this.preventBackNavigation);

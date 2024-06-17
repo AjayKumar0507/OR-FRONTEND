@@ -109,8 +109,8 @@ export class JobApplicationComponent implements OnInit{
         this.employerName = response.userName;
         this.employerMail = response.userEmail;
 
-        //this.mailToEmployer();
-        //this.sendMailToGraduate();
+        this.mailToEmployer();
+        this.sendMailToGraduate();
         this.addAppointments();
 
         this.router.navigateByUrl("/jobs");
