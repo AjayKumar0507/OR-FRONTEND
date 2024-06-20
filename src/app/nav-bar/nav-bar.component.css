@@ -89,3 +89,11 @@ img{
 .logOut{
     cursor: pointer;
 }
+
+
+.messages{
+    color:whitesmoke;
+    cursor: pointer;
+    font-size: 17px;
+    text-transform: uppercase;
+}

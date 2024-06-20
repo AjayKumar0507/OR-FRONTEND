@@ -34,7 +34,7 @@
             </li>
 
             <li *ngIf="this.dataService.userLoggedIn && this.dataService.userData.role.roleTitle=='employer' ">
-                <a href="#">Appointments</a>
+                <p class="messages">Appointments</p>
                 <div class="submenu">
                     <ul>
                         <li><a (click)="openAccepted()" >Accepted</a></li>
@@ -44,7 +44,7 @@
             </li>
 
             <li *ngIf="this.dataService.userLoggedIn" >
-                <a href="#">Messages</a>
+                <p class="messages" >Messages</p>
                 <div class="submenu">
                     <ul>
                         <li><a (click)="openInbox()" >Inbox</a></li>
